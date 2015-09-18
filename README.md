@@ -3,4 +3,6 @@
 ## Topics (till now):
 
 * HTML
-* Node.js
+* CSS
+* Bootstrap
+* Node.js 
