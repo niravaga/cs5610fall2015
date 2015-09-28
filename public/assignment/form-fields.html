@@ -44,70 +44,21 @@
 		<h1 class="page-header">Forms</h1>
 		
 		<ul class="nav nav-tabs">
-			<li class="active" role="presentation"><a href="#">Forms</a></li>
-			<li role="presentation"><a href="form-fields.html">Fields</a></li>
+			<li role="presentation"><a href="forms.html">Forms</a></li>
+			<li class="active" role="presentation"><a href="#">Fields</a></li>
 		</ul>
 
-		<div class="table-responsive">
-			<table class="table table-striped">
-			<thead>
-				<th>Form Name</th>
-				<th>Action</th>
-				<tr>
-					<td>
-						<input type="text" name="name" placeholder="name" class="form-control">
-					</td>
-					<td class="no-wrap">
-					<a href="#" class="btn btn-default">
-					<span class="glyphicon glyphicon-plus"></span>
-					</a>
-					<button type="button" class="btn btn-default">
-						<span class="glyphicon glyphicon-ok"></span>
-					</button>
-					</td>
-				</tr>
-			</thead>
-			<tr>
-				<td>
-					<a href="form-fields.html">Registration Form</a>
-				</td>
-				<td>
-					<a href="#">
-					<span class="glyphicon glyphicon-remove"></span>
-					</a>
-					<a href="#">
-					<span class="glyphicon glyphicon-pencil"></span>
-					</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="form-fields.html">Contact List</a>
-				</td>
-				<td>
-					<a href="#">
-					<span class="glyphicon glyphicon-remove"></span>
-					</a>
-					<a href="#">
-					<span class="glyphicon glyphicon-pencil"></span>
-					</a>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<a href="form-fields.html">To Do List</a>
-				</td>
-				<td>
-					<a href="#">
-					<span class="glyphicon glyphicon-remove"></span>
-					</a>
-					<a href="#">
-					<span class="glyphicon glyphicon-pencil"></span>
-					</a>
-				</td>
-			</tr>
-			</table>
-		</div>
+		<form>
+		<div class="row">
+			<label for="firstName">First Name:</label>
+			<div class="row">
+			<div class="col-xs-8"></div>
+			<input type="text" class="form-control" name="firstName" placeholder="First Name">
+			<div class="col-xs-4">
+			<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+			</div>
+			</div>
+		</form>
 	</div>
 
 	<!-- Latest compiled and minified JavaScript -->
