@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ajax Imdb</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="imdb.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<h1>Search IMDB</h1>
+		<input type="text" id="movieTitle" class="form-control" placeholder="Enter movie to search">
+		<button id="searchMovie" class="btn btn-primary btn-block">Search Movie</button>
+
+		<table class="table table-striped" id="results">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Plot</th>
+					<th>Poster</th>
+				</tr>
+			</thead>
+			<tbody id="container">
+				<tr id="template">
+					<td><a href="#" class="link"></a></td>
+					<td class="plot"></td>
+					<td><img src=""/ class="poster"></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</body>
+</html>
