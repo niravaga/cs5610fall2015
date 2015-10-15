@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="WhiteBoardApp">
+<head>
+	<title>Learning AngularJS</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+
+ 	<script type="text/javascript" src="app.js"></script>
+</head>
+<body>
+
+<div class="container" ng-controller="HelloWorldController">
+	<h1>Hello from AngularJS</h1>
+
+	<p>{{hello}}</p>
+
+	<h2>Courses</h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Seats</th>
+				<th>Starts</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="course in courses">
+				<td>{{course.title}}</td>
+				<td>{{course.seats}}</td>
+				<td>{{course.starts | date}}</td>
+				<td>
+					<button ng-click="removeCourse(course)" class="btn btn-danger">Remove</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<input ng-model="courseName" type="text" placeholder="Course Name" class="form-control">
+
+	<h2>{{courseName}}</h2>
+
+	<ul>
+	<li>{{user.fName}} </li>
+	<li>{{user.lName}}</li>
+	</ul>
+</div>
+
+
+</body>
+</html>
