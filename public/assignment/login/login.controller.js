@@ -19,8 +19,7 @@
 
 		function foundUser (user) {
 			$rootScope.$loggedInUser = user;
-			$location.url("/profile")
-			console.log("Found user:" + user.userName);
+			$location.url("/profile");
 		}
 	}
 	

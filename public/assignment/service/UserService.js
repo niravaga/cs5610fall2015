@@ -37,7 +37,7 @@
 		}
 
 		function createUser(newUser, callback) {
-			newUser[id] = guid();
+			newUser.id = guid();
 
 			users.push(newUser);
 			callback(newUser);
