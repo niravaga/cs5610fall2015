@@ -8,7 +8,7 @@
 		
 		var user1 = {
 			id: 10,
-			userName: "Nirav",
+			userName: "nirav",
 			password: "123",
 			email: "e@mail.com"
 		};
@@ -26,8 +26,7 @@
 		function findUserByUsernameAndPassword(findUserName, findPassword, callback) {
 			for (var i in users) {
 				if((users[i].userName == findUserName) && (users[i].password == findPassword)) {
-					console.log(users[i]);
-					callback(user);
+					callback(users[i]);
 					return;
 				}
 			}
@@ -58,7 +57,7 @@
 			for(var i in users) {
 				if(users[i].id == userId) {
 					users.splice(i,1);
-					newUser[id] = userId;
+					newUser.id = userId;
 					users.push(newUser);
 				}
 			}
