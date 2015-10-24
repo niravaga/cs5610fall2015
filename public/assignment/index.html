@@ -36,8 +36,11 @@
 	<!-- Sidebar Controller -->
 	<script src="sidebar/sidebar.controller.js"></script>
 	
-	<!-- UserService -->
+	<!-- User Service -->
 	<script src="service/UserService.js"></script>
+
+	<!-- Form Service -->
+	<script src="service/FormService.js"></script>
 
 	<!-- Login Controller -->
 	<script src="login/login.controller.js"></script>
@@ -47,6 +50,9 @@
 
 	<!-- Register Controller -->
 	<script src="register/register.controller.js"></script>
+
+	<!-- Form Controller -->
+	<script src="form/form.controller.js"></script>
 </head>
 
 <body>
@@ -60,7 +66,7 @@
 			<div class="col-sm-3 col-md-2 sidebar">
 				<div ng-include="'sidebar/sidebar.view.html'"></div>
 			</div>
-			<div class = "col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view>
 			</div>
 		</div>
 	</div>

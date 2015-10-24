@@ -14,8 +14,8 @@
 		.when("/admin", {
 			templateUrl: "admin/admin.view.html"
 		})
-		.when("/forms", {
-			templateUrl: "forms/forms.view.html"
+		.when("/form", {
+			templateUrl: "form/form.view.html"
 		})
 		.when("/register", {
 			templateUrl: "register/register.view.html"
