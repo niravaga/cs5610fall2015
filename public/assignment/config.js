@@ -12,7 +12,8 @@
 			templateUrl: "profile/profile.view.html"
 		})
 		.when("/admin", {
-			templateUrl: "admin/admin.view.html"
+			templateUrl: "admin/admin.view.html",
+			controller: "AdminController"
 		})
 		.when("/form", {
 			templateUrl: "form/form.view.html"

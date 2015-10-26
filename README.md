@@ -6,3 +6,4 @@
 * CSS
 * Bootstrap
 * Node.js 
+* AngularJS

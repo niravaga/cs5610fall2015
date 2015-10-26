@@ -3,7 +3,7 @@
 
 	<ul class="nav nav-tabs">
 		<li class="active" role="presentation"><a href="#">Forms</a></li>
-		<li role="presentation"><a href="form-fields.html">Fields</a></li>
+		<li role="presentation"><a href="#/form-fields">Fields</a></li>
 	</ul>
 
 	<div class="table-responsive">
@@ -19,10 +19,10 @@
 						<input ng-model="newForm.name" type="text" name="name" placeholder="Name" class="form-control">
 					</td>
 					<td class="no-wrap">
-						<button ng-click="addForm(newForm)" type="button" class="btn btn-default">
+						<button ng-click="addForm()" type="button" class="btn btn-default">
 							<span class="glyphicon glyphicon-plus"></span>
 						</button>
-						<button class="btn btn-default">
+						<button ng-click= "updateForm()" class="btn btn-default">
 							<span class="glyphicon glyphicon-ok"></span>
 						</button>
 					</td>
@@ -33,10 +33,10 @@
 					<a href="">{{form.name}}</a>
 				</td>
 				<td>
-					<a href="#">
+					<a ng-click="deleteForm($index)" class="btn btn-default">
 						<span class="glyphicon glyphicon-remove"></span>
 					</a>
-					<a href="#">
+					<a ng-click="selectForm($index)" class="btn btn-default">
 						<span class="glyphicon glyphicon-pencil"></span>
 					</a>
 				</td>

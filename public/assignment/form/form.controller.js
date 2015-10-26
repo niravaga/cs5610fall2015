@@ -14,10 +14,10 @@
 			$scope.$forms = userForms;
 		}
 
-		$scope.addForm = function(newForm) {
+		$scope.addForm = function() {
 			var myNewForm = {};
 
-			myNewForm.name = newForm.name;
+			myNewForm.name = $scope.newForm.name;
 
 			// newForm.name = $scope.$newForm.name;
 
@@ -28,18 +28,21 @@
 
 		}
 
-		$scope.deleteForm = function() {
-
+		$scope.deleteForm = function(index) {
+			FormService.deleteFormById($scope.$forms[index].id, function (allForms) {
+				FormService.findAllFormsForUser(currUser.id, foundForms);
+			});
 		}
 
-		$scope.selectForm = function() {
-
+		$scope.selectForm = function(index) {
+			
 		}
 
 		function formAdded(updatedForm) {
-			var newForm = updatedForm;
-			$scope.$forms.push(newForm);
-			console.log(newForm);
+			$scope.$forms.push(updatedForm);
+			$scope.newForm = {};
+
+			console.log(updatedForm);
 		}
 	}
 }) ();
