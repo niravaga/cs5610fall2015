@@ -1,7 +1,7 @@
 (function () {
 	angular
-		.module("WhiteBoardApp", [])
-		.controller("CourseController", CourseController);
+	.module("WhiteBoardApp", [])
+	.controller("CourseController", CourseController);
 
 	function CourseController($scope, $http, CourseService) {
 		CourseService.readAllCourses(renderCourses);

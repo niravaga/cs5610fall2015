@@ -9,6 +9,10 @@
 			templateUrl: "home/home.view.html",
 			controller: "homeController"
 		})
+		.when("/trip-create", {
+			templateUrl: "trip/trip-create.view.html",
+			controller: "tripCreateController"
+		})
 		.otherwise({
 			redirectTo: "/home"
 		});
