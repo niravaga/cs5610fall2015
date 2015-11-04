@@ -13,7 +13,7 @@
 			$http.get("https://maps.googleapis.com/maps/api/geocode/json?address="+ city +"&key=AIzaSyBbtkDxjuDPKJJev18t5TEnAGn0t9h-YrQ")
 			.then(function (response) {
 				$scope.response = response;
-				$location.url("/trip-create")
+				$location.url("/trip-create");
 			})
 		}
 	}
