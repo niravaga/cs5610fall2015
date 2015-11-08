@@ -17,9 +17,17 @@
 			templateUrl: "login/login.view.html",
 			controller: "loginController"
 		})
+		.when("/profile", {
+			templateUrl: "profile/profile.view.html",
+			controller: "profileController"
+		})
 		.when("/trip-create", {
 			templateUrl: "trip/trip-create.view.html",
 			controller: "tripCreateController"
+		})
+		.when("/trip-search", {
+			templateUrl: "trip/trip-search.view.html",
+			controller: "tripSearchController"
 		})
 		.otherwise({
 			redirectTo: "/home"

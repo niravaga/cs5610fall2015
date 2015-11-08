@@ -1,4 +1,4 @@
 (function() {
 	angular
-	.module("TripPlannerApp", ["ngRoute"]);
+	.module("TripPlannerApp", ["ngRoute", "uiGmapgoogle-maps"]);
 })();

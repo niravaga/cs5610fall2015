@@ -16,5 +16,11 @@
 				$location.url("/trip-create");
 			})
 		}
+
+		$scope.searchTrips = function() {
+			console.log("Searching trips");
+
+			$location.url("/trip-search")
+		}
 	}
 })();

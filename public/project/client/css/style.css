@@ -114,6 +114,6 @@
   white-space: nowrap;
 }
 
-#map {
-  height: 300px;
+.angular-google-map-container {
+  height: 500px;
 }
