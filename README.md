@@ -7,3 +7,5 @@
 * Bootstrap
 * Node.js 
 * AngularJS
+* ExpressJS
+* MongoDB
