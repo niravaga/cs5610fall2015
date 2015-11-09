@@ -6,28 +6,43 @@
 	function PageService($http, $q) {
 		var api = {
 			getAllPages: getAllPages,
-			addPage: addPage
+			addPage: addPage,
+			getPageById: getPageById
 		};
 
 		return api;
 
-		function getAllPages () {
-			return [
-			{label: "Home"},
-			{label: "About"},
-			{label: "Login"},
-			{label: "Register"},
-			];
+		function getAllPages() {
+			var deferred = $q.defer();
+			
+			$http.get("/api/experiments/mongo/pe/page")
+				.success(function (pages) {
+					deferred.resolve(pages);
+				});
+			
+			return deferred.promise;
 		}
 
 		function addPage (page) {
 			var deferred = $q.defer();
 			$http
 				.post("/api/experiments/mongo/pe/page", page)
-			.success(function(pages) {
-				deferred.resolve(pages);
-			});
+				.success(function (pages) {
+					deferred.resolve(pages);
+				});
 
+			return deferred.promise;
+		}
+		
+		function getPageById(pageId) {
+			var deferred = $q.defer();
+			
+			$http
+				.get("/api/experiments/mongo/pe/page/" + pageId)
+				.success(function (page) {
+					deferred.resolve(page);
+				});
+				
 			return deferred.promise;
 		}
 	}

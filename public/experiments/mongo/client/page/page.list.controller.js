@@ -8,12 +8,15 @@
 		model.addPage = addPage;
 
 		function init() {
-			model.pages = PageService.getAllPages();
-
+			PageService
+				.getAllPages()
+				.then(function (pages) {
+					model.pages = pages;
+			});
 		}
 
 		init();
-
+		
 		function addPage (page) {
 			PageService
 			.addPage(page)
@@ -23,5 +26,5 @@
 			});
 			// console.log(page);		
 		}
-		}
-	}) ();
+	}
+}) ();

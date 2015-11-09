@@ -13,7 +13,9 @@
 			</td>
 		</tr>
 		<tr ng-repeat="page in model.pages">
-			<td>{{page.label}}</td>
+			<td>
+				<a href="#/page/{{page._id}}/details">{{page.label}}</a>
+			</td> 
 			<td>&nbsp;</td>
 		</tr>
 	</tbody>
