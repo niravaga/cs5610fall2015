@@ -7,18 +7,19 @@
 		var api = {
 			getAllPages: getAllPages,
 			addPage: addPage,
-			getPageById: getPageById
+			getPageById: getPageById,
+			addContent: addContent
 		};
 
 		return api;
 
-		function getAllPages() {
+		function getAllPages () {
 			var deferred = $q.defer();
 			
 			$http.get("/api/experiments/mongo/pe/page")
-				.success(function (pages) {
-					deferred.resolve(pages);
-				});
+			.success(function (pages) {
+				deferred.resolve(pages);
+			});
 			
 			return deferred.promise;
 		}
@@ -26,23 +27,35 @@
 		function addPage (page) {
 			var deferred = $q.defer();
 			$http
-				.post("/api/experiments/mongo/pe/page", page)
-				.success(function (pages) {
-					deferred.resolve(pages);
-				});
+			.post("/api/experiments/mongo/pe/page", page)
+			.success(function (pages) {
+				deferred.resolve(pages);
+			});
 
 			return deferred.promise;
 		}
 		
-		function getPageById(pageId) {
+		function getPageById (pageId) {
 			var deferred = $q.defer();
 			
 			$http
-				.get("/api/experiments/mongo/pe/page/" + pageId)
-				.success(function (page) {
-					deferred.resolve(page);
-				});
-				
+			.get("/api/experiments/mongo/pe/page/" + pageId)
+			.success(function (page) {
+				deferred.resolve(page);
+			});
+			
+			return deferred.promise;
+		}
+		
+		function addContent (pageId, contentType) {
+			var deferred = $q.defer();
+			
+			$http
+			.post("/api/experiments/mongo/pe/page/" + pageId + "/content/" + contentType)
+			.success(function (page) {
+				deferred.resolve(page);
+			});
+			
 			return deferred.promise;
 		}
 	}

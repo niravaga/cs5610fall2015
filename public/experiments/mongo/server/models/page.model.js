@@ -3,7 +3,17 @@ var q = require("q");
 module.exports = function (mongoose, db) {
 	var PageSchema = mongoose.Schema({
 		"label": String,
-		"created": { type: Date, default: Date.now }
+		"created": { type: Date, default: Date.now },
+		"content": [{
+			"contentType": {
+				type: String,
+				enum: ["HEADING", "LABEL", "PARAGRAPH", "LIST", "FORM"]
+			},
+			"heading": {
+				"size": { type: Number, default: 2 },
+				"content": {type: String, default: "Heading"}
+			}
+		}]
 	}, {collection: "page"});
 	
 	var PageModel = mongoose.model("PageModel", PageSchema);
@@ -11,7 +21,8 @@ module.exports = function (mongoose, db) {
 	var api = {
 		addPage: addPage,
 		getAllPages: getAllPages,
-		getPageById: getPageById
+		getPageById: getPageById,
+		addContent: addContent
 	};
 	
 	return api;
@@ -48,4 +59,20 @@ module.exports = function (mongoose, db) {
 
 		return deferred.promise;
 	}
+	
+	function addContent(pageId, contentType) {
+		var deferred = q.defer();
+		
+		PageModel.findById(pageId, function (err, page) {
+			var content = {
+				contentType: contentType
+			};
+
+			page.content.push(content);
+			page.save(function (err, doc) {
+				deferred.resolve(doc);
+			});
+		});
+	}
+		
 };

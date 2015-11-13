@@ -7,7 +7,9 @@
 		var model = this;
 
 		var pageId = $routeParams.pageId;
-
+		
+		model.addContent = addContent;
+		
 		function init() {
 			PageService.getPageById(pageId)
 				.then(function (page) {
@@ -16,6 +18,11 @@
 		}
 
 		init();
+		
+		function addContent(contentType) {
+			PageService
+				.addContent(model.page._id, contentType)
+		}
 
 	}
 })();

@@ -9,9 +9,9 @@
 
 		function init() {
 			PageService
-				.getAllPages()
-				.then(function (pages) {
-					model.pages = pages;
+			.getAllPages()
+			.then(function (pages) {
+				model.pages = pages;
 			});
 		}
 
@@ -20,8 +20,8 @@
 		function addPage (page) {
 			PageService
 			.addPage(page)
-				.then(function (pages) {
-					console.log(pages);
+			.then(function (pages) {
+				console.log(pages);
 				model.pages = pages;
 			});
 			// console.log(page);		

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="FormBuilderApp">
+<head>
+	<title>Form Builder</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="./css/style.css">
+
+	<!--jQuery-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	
+	<!-- Latest compiled and minified  BootStrap JS -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+
+	<!-- AngularJS Routing -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
+
+	<!-- App.js -->
+	<script src="app.js"></script>
+
+	<!-- Config.js -->
+	<script src="config.js"></script>
+	
+	<!-- Header Controller -->
+	<script src="header/header.controller.js"></script>
+
+	<!-- Sidebar Controller -->
+	<script src="sidebar/sidebar.controller.js"></script>
+	
+	<!-- User Service -->
+	<script src="service/UserService.js"></script>
+
+	<!-- Form Service -->
+	<script src="service/FormService.js"></script>
+
+	<!-- Login Controller -->
+	<script src="login/login.controller.js"></script>
+
+	<!-- Profile Controller -->
+	<script src="profile/profile.controller.js"></script>
+
+	<!-- Register Controller -->
+	<script src="register/register.controller.js"></script>
+
+	<!-- Form Controller -->
+	<script src="form/form.controller.js"></script>
+
+	<!-- Admin Controller -->
+	<script src="admin/admin.controller.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div ng-include="'header/header.view.html'"></div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<div ng-include="'sidebar/sidebar.view.html'"></div>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

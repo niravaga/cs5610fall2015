@@ -10,10 +10,10 @@
 			controller: "PageListController",
 			controllerAs: "model"
 		})
-			.when("/page/:pageId/details", {
-				templateUrl: "page/page.details.view.html",
-				controller: "PageDetailsController",
-				controllerAs: "model"
+		.when("/page/:pageId/details", {
+			templateUrl: "page/page.details.view.html",
+			controller: "PageDetailsController",
+			controllerAs: "model"
 		});
 	}
 }) ();
