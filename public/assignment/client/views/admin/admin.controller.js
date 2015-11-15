@@ -1,6 +1,6 @@
 (function () {
 	angular
-	.module
+	.module("FormBuilderApp")
 	.controller("AdminController", AdminController);
 
 	function AdminController () {

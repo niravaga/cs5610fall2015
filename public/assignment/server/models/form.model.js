@@ -12,8 +12,8 @@ module.exports = function (app, db) {
 
 	return api;
 
-	function createForm(user) {
-
+	function createForm(form) {
+		
 	}
 
 	function findAllForms () {
@@ -24,11 +24,11 @@ module.exports = function (app, db) {
 
 	}
 
-	function updateForm (id, user) {
+	function updateForm (id, form) {
 		
 	}
 
-	function deleteForm(user) {
+	function deleteForm(form) {
 
 	}
 

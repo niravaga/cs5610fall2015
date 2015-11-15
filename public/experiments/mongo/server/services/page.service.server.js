@@ -3,6 +3,7 @@ module.exports = function (app, model) {
 	app.get("/api/experiments/mongo/pe/page", getAllPages);
 	app.get("/api/experiments/mongo/pe/page/:id", getPageById);
 	app.post("/api/experiments/mongo/pe/page/:pageId/content/:contentType", addContent);
+
 	function addPage(req, res) {
 		
 		var page = req.body;

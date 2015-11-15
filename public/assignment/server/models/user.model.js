@@ -1,4 +1,7 @@
-module.exports = function (app, db) {
+var users = require("./user.mock.json");
+var uuid = require("node-uuid");
+
+module.exports = function (app) {
 
 	var api = {
 		createUser: createUser,
@@ -6,37 +9,67 @@ module.exports = function (app, db) {
 		findUserById: findUserById,
 		updateUser: updateUser,
 		deleteUser: deleteUser,
-		findUserByUserName: findUserByUserName,
+		findUserByUsername: findUserByUsername,
 		findUserByCredentials: findUserByCredentials
 	};
 
 	return api;
 
-	function createUser(user) {
+	function createUser(newUser) {
+		var user = newUser;
+		user.id = uuid.v1();
 
+		console.log(user);
+		users.push(newUser);
+
+		return users;
 	}
 
-	function findAllUsers () {
-		
+	function findAllUsers() {
+		return users;
 	}
 
 	function findUserById(id) {
-
+		for(var i in users) {
+			if(users[i].id == id)
+				return users[i];
+		}
 	}
 
-	function updateUser (id, user) {
-		
+	function updateUser(id, user) {
+		for(var i in users) {
+			if(users[i].id == id) {
+				users[i] = user;
+				break;
+			}
+		}
+
+		return user;
 	}
 
-	function deleteUser(user) {
+	function deleteUser(id) {
+		for(var i in users) {
+			if (users[i].id == user.id) {
+				users.splice(i, 1);
+				break;
+			}
+		}
 
+		return users;
 	}
 
-	function findUserByUserName (username) {
-		
+	function findUserByUsername(username) {
+		for(var i in users) {
+			if(users[i].username == username)
+				return users[i];
+		}
 	}
 
-	function findUserByCredentials (credentails) {
-		
+	function findUserByCredentials (credentials) {
+		for(var i in users) {
+			if(users[i].username == credentials.username &&
+				users[i].password == credentials.password)
+				return users[i];
+		}
 	}
 };

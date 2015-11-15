@@ -3,20 +3,26 @@
 	.module("FormBuilderApp")
 	.controller("ProfileController", ProfileController)
 
-	function ProfileController ($scope, $rootScope, UserService) {
+	function ProfileController ($rootScope, UserService) {
 		
-		console.log($rootScope.$loggedInUser);
-		$scope.$loggedInUser = $rootScope.$loggedInUser;
+		var model = this;
+		// console.log($rootScope.loggedInUser);
+		model.loggedInUser = $rootScope.loggedInUser;
 
-		$scope.update = function () {
-			var userId = $scope.$loggedInUser.id;
-			var newUser = $scope.$loggedInUser;
+		// console.log("Loaded");
 
-			UserService.updateUser(userId, newUser, updatedUser);
+		
+		model.update = update;
+
+		function update() {
+			var updatedUser = model.loggedInUser;
+			var id = updatedUser.id;
+
+			UserService.updateUser(id, updatedUser)
+			.then(function (response) {
+				console.log(response);
+			});
 		}
 
-		function updatedUser (user) {
-			console.log(user);
-		}
 	}
 }) ();
