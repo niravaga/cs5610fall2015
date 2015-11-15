@@ -18,7 +18,9 @@
 			controller: "AdminController"
 		})
 		.when("/form", {
-			templateUrl: "views/form/form.view.html"
+			templateUrl: "views/form/form.view.html",
+			controller: "FormController",
+			controllerAs: "model"
 		})
 		.when("/register", {
 			templateUrl: "views/register/register.view.html",
@@ -30,7 +32,7 @@
 			controller: "LoginController",
 			controllerAs: "model"
 		})
-		.when("/form/feild", {
+		.when("/user/:userId/form/:formId/fields", {
 			templateUrl: "views/field/field.view.html",
 			controller: "FieldController",
 			controllerAs: "model"

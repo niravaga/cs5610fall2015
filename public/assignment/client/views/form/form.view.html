@@ -1,46 +1,44 @@
-<div ng-controller="FormController">
-	<h1 class="page-header">Forms</h1>
+<h1 class="page-header">Forms</h1>
 
-	<ul class="nav nav-tabs">
-		<li class="active" role="presentation"><a href="#">Forms</a></li>
-		<li role="presentation"><a href="#/form-fields">Fields</a></li>
-	</ul>
+<ul class="nav nav-tabs">
+	<li class="active" role="presentation"><a href="#/form">Forms</a></li>
+	<li role="presentation"><a href="#/form/field">Fields</a></li>
+</ul>
 
-	<div class="table-responsive">
-		<table class="table table-striped">
-			<thead>
-				<th>
-					<span class="glyphicon glyphicon-triangle-bottom"></span>
-					Form Name
-				</th>
-				<th>Action</th>
-				<tr>
-					<td>
-						<input ng-model="newForm.name" type="text" name="name" placeholder="Name" class="form-control">
-					</td>
-					<td class="no-wrap">
-						<button ng-click="addForm()" type="button" class="btn btn-default">
-							<span class="glyphicon glyphicon-plus"></span>
-						</button>
-						<button ng-click= "updateForm()" class="btn btn-default">
-							<span class="glyphicon glyphicon-ok"></span>
-						</button>
-					</td>
-				</tr>
-			</thead>
-			<tr ng-repeat="form in $forms">
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<th>
+				<span class="glyphicon glyphicon-triangle-bottom"></span>
+				Form Name
+			</th>
+			<th>Action</th>
+			<tr>
 				<td>
-					<a href="">{{form.name}}</a>
+					<input ng-model="newForm.name" type="text" name="name" placeholder="Name" class="form-control">
 				</td>
-				<td>
-					<a ng-click="deleteForm($index)" class="btn btn-default">
-						<span class="glyphicon glyphicon-remove"></span>
-					</a>
-					<a ng-click="selectForm($index)" class="btn btn-default">
-						<span class="glyphicon glyphicon-pencil"></span>
-					</a>
+				<td class="no-wrap">
+					<button ng-click="addForm()" type="button" class="btn btn-default">
+						<span class="glyphicon glyphicon-plus"></span>
+					</button>
+					<button ng-click= "updateForm()" class="btn btn-default">
+						<span class="glyphicon glyphicon-ok"></span>
+					</button>
 				</td>
 			</tr>
-		</table>
-	</div>
+		</thead>
+		<tr ng-repeat="form in $forms">
+			<td>
+				<a href="">{{form.name}}</a>
+			</td>
+			<td>
+				<a ng-click="deleteForm($index)" class="btn btn-default">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+				<a ng-click="selectForm($index)" class="btn btn-default">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</a>
+			</td>
+		</tr>
+	</table>
 </div>
