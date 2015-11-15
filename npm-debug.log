@@ -1,0 +1,144 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/home/niravaga/.nvm/versions/node/v4.1.0/bin/node',
+1 verbose cli   '/home/niravaga/.nvm/versions/node/v4.1.0/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'body-parser',
+1 verbose cli   '--save' ]
+2 info using npm@2.14.3
+3 info using node@v4.1.0
+4 verbose install initial load of /home/niravaga/win_mount/Data/codeHere/web_dev/package.json
+5 verbose installManyTop reading scoped package data from /home/niravaga/win_mount/Data/codeHere/web_dev/node_modules/express/package.json
+6 verbose installManyTop reading scoped package data from /home/niravaga/win_mount/Data/codeHere/web_dev/node_modules/mongoose/package.json
+7 verbose installManyTop reading scoped package data from /home/niravaga/win_mount/Data/codeHere/web_dev/node_modules/node-uuid/package.json
+8 verbose installManyTop reading scoped package data from /home/niravaga/win_mount/Data/codeHere/web_dev/node_modules/q/package.json
+9 info package.json node-uuid@1.4.7 No license field.
+10 info package.json q@1.4.1 license should be a valid SPDX license expression
+11 verbose readDependencies loading dependencies from /home/niravaga/win_mount/Data/codeHere/web_dev/package.json
+12 silly cache add args [ 'body-parser', null ]
+13 verbose cache add spec body-parser
+14 silly cache add parsed spec Result {
+14 silly cache add   raw: 'body-parser',
+14 silly cache add   scope: null,
+14 silly cache add   name: 'body-parser',
+14 silly cache add   rawSpec: '',
+14 silly cache add   spec: '*',
+14 silly cache add   type: 'range' }
+15 silly addNamed body-parser@*
+16 verbose addNamed "*" is a valid semver range for body-parser
+17 silly addNameRange { name: 'body-parser', range: '*', hasData: false }
+18 silly mapToRegistry name body-parser
+19 silly mapToRegistry using default registry
+20 silly mapToRegistry registry https://registry.npmjs.org/
+21 silly mapToRegistry uri https://registry.npmjs.org/body-parser
+22 verbose addNameRange registry:https://registry.npmjs.org/body-parser not in flight; fetching
+23 verbose request uri https://registry.npmjs.org/body-parser
+24 verbose request no auth needed
+25 info attempt registry request try #1 at 10:00:16 PM
+26 verbose request id b24f8f3dd88c0811
+27 verbose etag "B2GKRC30258OJBP3XB2GXHK4W"
+28 http request GET https://registry.npmjs.org/body-parser
+29 http 304 https://registry.npmjs.org/body-parser
+30 silly get cb [ 304,
+30 silly get   { date: 'Sun, 15 Nov 2015 06:00:17 GMT',
+30 silly get     via: '1.1 varnish',
+30 silly get     'cache-control': 'max-age=60',
+30 silly get     etag: '"B2GKRC30258OJBP3XB2GXHK4W"',
+30 silly get     age: '6',
+30 silly get     connection: 'keep-alive',
+30 silly get     'x-served-by': 'cache-lax1432-LAX',
+30 silly get     'x-cache': 'HIT',
+30 silly get     'x-cache-hits': '2',
+30 silly get     'x-timer': 'S1447567217.130092,VS0,VE0',
+30 silly get     vary: 'Accept' } ]
+31 verbose etag https://registry.npmjs.org/body-parser from cache
+32 verbose get saving body-parser to /home/niravaga/.npm/registry.npmjs.org/body-parser/.cache.json
+33 silly addNameRange number 2 { name: 'body-parser', range: '*', hasData: true }
+34 silly addNameRange versions [ 'body-parser',
+34 silly addNameRange   [ '1.0.0',
+34 silly addNameRange     '1.0.1',
+34 silly addNameRange     '1.0.2',
+34 silly addNameRange     '1.1.0',
+34 silly addNameRange     '1.1.1',
+34 silly addNameRange     '1.1.2',
+34 silly addNameRange     '1.2.0',
+34 silly addNameRange     '1.2.1',
+34 silly addNameRange     '1.2.2',
+34 silly addNameRange     '1.3.0',
+34 silly addNameRange     '1.3.1',
+34 silly addNameRange     '1.4.0',
+34 silly addNameRange     '1.4.1',
+34 silly addNameRange     '1.4.2',
+34 silly addNameRange     '1.4.3',
+34 silly addNameRange     '1.5.0',
+34 silly addNameRange     '1.5.1',
+34 silly addNameRange     '1.5.2',
+34 silly addNameRange     '1.6.0',
+34 silly addNameRange     '1.6.1',
+34 silly addNameRange     '1.6.2',
+34 silly addNameRange     '1.6.3',
+34 silly addNameRange     '1.6.4',
+34 silly addNameRange     '1.6.5',
+34 silly addNameRange     '1.6.6',
+34 silly addNameRange     '1.6.7',
+34 silly addNameRange     '1.7.0',
+34 silly addNameRange     '1.8.0',
+34 silly addNameRange     '1.8.1',
+34 silly addNameRange     '1.8.2',
+34 silly addNameRange     '1.8.3',
+34 silly addNameRange     '1.8.4',
+34 silly addNameRange     '1.9.0',
+34 silly addNameRange     '1.9.1',
+34 silly addNameRange     '1.9.2',
+34 silly addNameRange     '1.9.3',
+34 silly addNameRange     '1.10.0',
+34 silly addNameRange     '1.10.1',
+34 silly addNameRange     '1.10.2',
+34 silly addNameRange     '1.11.0',
+34 silly addNameRange     '1.12.0',
+34 silly addNameRange     '1.12.1',
+34 silly addNameRange     '1.12.2',
+34 silly addNameRange     '1.12.3',
+34 silly addNameRange     '1.12.4',
+34 silly addNameRange     '1.13.0',
+34 silly addNameRange     '1.13.1',
+34 silly addNameRange     '1.13.2',
+34 silly addNameRange     '1.13.3',
+34 silly addNameRange     '1.14.0',
+34 silly addNameRange     '1.14.1' ] ]
+35 silly addNamed body-parser@1.14.1
+36 verbose addNamed "1.14.1" is a plain semver version for body-parser
+37 silly mapToRegistry name body-parser
+38 silly mapToRegistry using default registry
+39 silly mapToRegistry registry https://registry.npmjs.org/
+40 silly mapToRegistry uri https://registry.npmjs.org/body-parser
+41 verbose addRemoteTarball https://registry.npmjs.org/body-parser/-/body-parser-1.14.1.tgz not in flight; adding
+42 verbose addRemoteTarball [ 'https://registry.npmjs.org/body-parser/-/body-parser-1.14.1.tgz',
+42 verbose addRemoteTarball   'ffe921eba3ce8f191e2a8a8803844bd025f3c6dc' ]
+43 info retry fetch attempt 1 at 10:00:16 PM
+44 info attempt registry request try #1 at 10:00:16 PM
+45 http fetch GET https://registry.npmjs.org/body-parser/-/body-parser-1.14.1.tgz
+46 http fetch 200 https://registry.npmjs.org/body-parser/-/body-parser-1.14.1.tgz
+47 silly fetchAndShaCheck shasum ffe921eba3ce8f191e2a8a8803844bd025f3c6dc
+48 verbose addTmpTarball /tmp/npm-12970-8dee79e1/registry.npmjs.org/body-parser/-/body-parser-1.14.1.tgz not in flight; adding
+49 verbose addTmpTarball already have metadata; skipping unpack for body-parser@1.14.1
+50 verbose stack Error: EACCES: permission denied, mkdir '/home/niravaga/.npm/body-parser/1.14.1'
+50 verbose stack     at Error (native)
+51 verbose cwd /home/niravaga/win_mount/Data/codeHere/web_dev
+52 error Linux 3.16.0-53-generic
+53 error argv "/home/niravaga/.nvm/versions/node/v4.1.0/bin/node" "/home/niravaga/.nvm/versions/node/v4.1.0/bin/npm" "install" "body-parser" "--save"
+54 error node v4.1.0
+55 error npm  v2.14.3
+56 error path /home/niravaga/.npm/body-parser/1.14.1
+57 error code EACCES
+58 error errno -13
+59 error syscall mkdir
+60 error Error: EACCES: permission denied, mkdir '/home/niravaga/.npm/body-parser/1.14.1'
+60 error     at Error (native)
+60 error  { [Error: EACCES: permission denied, mkdir '/home/niravaga/.npm/body-parser/1.14.1']
+60 error   errno: -13,
+60 error   code: 'EACCES',
+60 error   syscall: 'mkdir',
+60 error   path: '/home/niravaga/.npm/body-parser/1.14.1',
+60 error   parent: 'OpenShift-Sample-App' }
+61 error Please try running this command again as root/Administrator.
+62 verbose exit [ -13, true ]
