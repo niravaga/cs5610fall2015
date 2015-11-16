@@ -1,8 +1,8 @@
 module.exports = function (app, model) {
 	app.get("/api/assignment/user/username=:username&password=:password", findUserByCredentials);
 	app.get("/api/assignment/user/username=:username", findUserByUsername);
-	app.post("/api/assignment/user", createUser);
 	app.get("/api/assignment/user", findAllUsers);
+	app.post("/api/assignment/user", createUser);
 	app.get("/api/assignment/user/:id", findUserById);
 	app.put("/api/assignment/user/:id", updateUser);
 	app.delete("/api/assignment/user/:id", deleteUser);

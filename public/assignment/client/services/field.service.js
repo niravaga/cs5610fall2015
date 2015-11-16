@@ -9,6 +9,7 @@
 
 		var api = {
 			findAllFormFields : findAllFormFields,
+			findFormField: findFormField,
 			createFormField : createFormField,
 			deleteFormField : deleteFormField
 		};
@@ -24,6 +25,18 @@
 			});
 
 			return deferred.promise;
+		}
+
+		function findFormField (formId, fieldId) {
+			var deferred = $q.defer();
+			
+			$http
+			.get("/api/assignment/form/" + formId + "/field")
+			.success(function (feilds) {
+				deferred.resolve(feilds);
+			});
+
+			return deferred.promise;	
 		}
 
 		function createFormField (formId, newField) {

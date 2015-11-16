@@ -6,11 +6,7 @@
 	function ProfileController ($rootScope, UserService) {
 		
 		var model = this;
-		// console.log($rootScope.loggedInUser);
 		model.loggedInUser = $rootScope.loggedInUser;
-
-		// console.log("Loaded");
-
 		
 		model.update = update;
 

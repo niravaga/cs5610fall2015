@@ -26,7 +26,6 @@
 		}
 
 		function addField (fieldType) {
-			console.log(fieldType);
 			var newField;
 			switch (fieldType) {
 				case "SingleLineText" :
@@ -96,8 +95,6 @@
 
 		function removeField (fieldId) {
 
-			console.log(fieldId);
-			
 			FieldService
 			.deleteFormField(formId, fieldId)
 			.then(init);
