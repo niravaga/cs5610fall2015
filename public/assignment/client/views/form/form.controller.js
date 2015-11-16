@@ -3,46 +3,57 @@
 	.module("FormBuilderApp")
 	.controller("FormController", FormController);
 
-	function FormController ($scope, $rootScope, UserService, FormService) {
+	function FormController ($rootScope, FormService) {
 		
-		var currUser = $rootScope.$loggedInUser;
-		// console.log(currUser);
+		var model = this;
+		model.addForm = addForm;
+		model.updateForm = updateForm;
+		model.selectForm = selectForm;
+		model.deleteForm = deleteForm;
 
-		FormService.findAllFormsForUser(currUser.id, foundForms);
+		currUser = $rootScope.loggedInUser;
+		model.user = currUser;
+		console.log(model.user);
+
+		function init() {
+			FormService
+			.findAllFormsForUser(currUser.id)
+			.then(foundForms);	
+		}
+		
+		init();
 
 		function foundForms (userForms) {
-			$scope.$forms = userForms;
+			model.forms = userForms;
 		}
 
-		$scope.addForm = function() {
-			var myNewForm = {};
-
-			myNewForm.name = $scope.newForm.name;
-
-			// newForm.name = $scope.$newForm.name;
-
-			FormService.createFormForUser(currUser.id, myNewForm, formAdded);
+		function addForm() {
+			var newForm = model.newForm;
+			newForm.feilds = [];
+			
+			FormService.createFormForUser(currUser.id, newForm)
+			.then(formAdded);
 		}
 
-		$scope.updateForm = function() {
-
-		}
-
-		$scope.deleteForm = function(index) {
-			FormService.deleteFormById($scope.$forms[index].id, function (allForms) {
-				FormService.findAllFormsForUser(currUser.id, foundForms);
-			});
-		}
-
-		$scope.selectForm = function(index) {
+		
+		function updateForm (updatedForm) {
 			
 		}
 
-		function formAdded(updatedForm) {
-			$scope.$forms.push(updatedForm);
-			$scope.newForm = {};
 
-			console.log(updatedForm);
+		function selectForm (index) {
+
+		}
+
+		function deleteForm (formId) {
+			FormService
+			.deleteFormById(formId)
+			.then(init);
+		}
+
+		function formAdded(forms) {
+			init();
+			model.newForm = {};
 		}
 	}
 }) ();

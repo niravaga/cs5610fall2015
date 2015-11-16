@@ -15,27 +15,27 @@
 			<th>Action</th>
 			<tr>
 				<td>
-					<input ng-model="newForm.name" type="text" name="name" placeholder="Name" class="form-control">
+					<input ng-model="model.newForm.title" type="text" name="name" placeholder="Name" class="form-control">
 				</td>
 				<td class="no-wrap">
-					<button ng-click="addForm()" type="button" class="btn btn-default">
+					<button ng-click="model.addForm()" type="button" class="btn btn-default">
 						<span class="glyphicon glyphicon-plus"></span>
 					</button>
-					<button ng-click= "updateForm()" class="btn btn-default">
+					<button ng-click= "model.updateForm()" class="btn btn-default">
 						<span class="glyphicon glyphicon-ok"></span>
 					</button>
 				</td>
 			</tr>
 		</thead>
-		<tr ng-repeat="form in $forms">
+		<tr ng-repeat="form in model.forms">
 			<td>
-				<a href="">{{form.name}}</a>
+				<a href="#/user/{{model.user.id}}/form/{{form.id}}/fields">{{form.title}}</a>
 			</td>
 			<td>
-				<a ng-click="deleteForm($index)" class="btn btn-default">
+				<a ng-click="model.deleteForm(form.id)" class="btn btn-default">
 					<span class="glyphicon glyphicon-remove"></span>
 				</a>
-				<a ng-click="selectForm($index)" class="btn btn-default">
+				<a ng-click="model.selectForm(form.id)" class="btn btn-default">
 					<span class="glyphicon glyphicon-pencil"></span>
 				</a>
 			</td>

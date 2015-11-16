@@ -5,11 +5,14 @@ module.exports = function (app) {
 
 	var api = {
 		createForm: createForm,
+		createFormForUser: createFormForUser,
 		findAllForms: findAllForms,
 		findFormById: findFormById,
 		updateForm: updateForm,
-		deleteForm: deleteForm,
-		findFormByTitle: findFormByTitle
+		deleteFormById: deleteFormById,
+		findFormByTitle: findFormByTitle,
+		findFormsByUser: findFormsByUser,
+		findAllFormFields: findAllFormFields
 	};
 
 	return api;
@@ -22,6 +25,12 @@ module.exports = function (app) {
 		forms.push(form);
 
 		return forms;
+	}
+
+	function createFormForUser (userId, newForm) {
+		newForm.userId = userId;
+
+		return createForm(newForm);
 	}
 
 	function findAllForms () {
@@ -47,7 +56,7 @@ module.exports = function (app) {
 		return updatedForm;
 	}
 
-	function deleteForm (id) {
+	function deleteFormById (id) {
 		for(var i in forms) {
 			if (forms[i].id == id) {
 				forms.splice(i, 1);
@@ -77,5 +86,14 @@ module.exports = function (app) {
 		}
 
 		return userForms;
+	}
+
+	function findAllFormFields (formId) {
+		var formFeilds = [];
+
+		var form = findFormById(formId);
+
+		// console.log(form.fields);
+		return form.fields;
 	}
 };

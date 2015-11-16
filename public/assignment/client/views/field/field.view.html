@@ -1,9 +1,77 @@
-<label for="addField">Add New Field:</label>
-<ul ng-model="model.fieldType" class="dropdown-menu">
-  <li ng-value="SingleLineText">Single Line Text Field</li>
-  <li ng-value="MultiLineText">Multi Line Text Field</li>
-  <li ng-value="Date">Date Field</li>
-  <li ng-value="DropDown">Dropdown Field</li>
-  <li ng-value="CheckBoxes">Checkboxes Field</li>
-  <li ng-value="RadioButtons">Radio Buttons Field</li>
+<h1 class="page-header">{{model.form.title}}</h1>
+
+<ul class="nav nav-tabs">
+	<ul class="nav nav-tabs">
+		<li ng-class="{'active' : $location.url().indexOf('forms') != -1}"><a href="#/forms">Forms</a></li>
+		<li ng-class="{'active' : $location.url().indexOf('fields') != -1}"><a href="#/">Fields</a></li>
+	</ul>
 </ul>
+
+<form>
+	<div ng-repeat="field in model.fields">
+		<div class="form-group">
+			<label>
+				{{field.label}}
+			</label>
+			<div class="input-group">
+				<div ng-switch="field.type">
+					<div ng-switch-when="TEXT">
+						<input class="form-control" type="text" placeholder="{{field.placeholder}}">
+					</div>
+					<div ng-switch-when="TEXTAREA">
+						<textarea class="form-control" placeholder="{{field.placeholder}}"></textarea>
+					</div>
+					<div ng-switch-when="EMAIL">
+						<input class="form-control" type="email" placeholder="{{field.placeholder}}">
+					</div>
+					<div ng-switch-when="DATE">
+						<input class="form-control" type="date">
+					</div>
+					<div ng-switch-when="RADIOS">
+						<div class = "radio">
+							<div ng-repeat="option in field.options">
+								<label><input type="radio" name="{{field.label}}" value="{{option.value}}">{{option.label}}</label>
+							</div>
+						</div>
+					</div>
+					<div ng-switch-when="CHECKBOXES">
+						<div ng-repeat="option in field.options">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" value="{{option.value}}">{{option.label}}
+								</label>
+							</div>
+						</div>
+					</div>
+					<div ng-switch-when="OPTIONS">
+						<select class="form-control">
+							<option ng-repeat="option in field.options" value="{{option.value}}">{{option.label}}</option>
+						</select>
+					</div>
+				</div>
+				<span class="input-group-btn">
+					<a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-pencil"></span></button></a>
+					<a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button></a>
+					<button class="btn btn-default" type="button" ng-click="model.removeField(field)"><span class="glyphicon glyphicon-remove"></span></button>
+					<a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-align-justify"></span></button></a>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="addnewfield">Add New Field:</label>
+		<div class="input-group">
+			<select class="form-control" id="addnewfield" ng-model="model.fieldType">
+				<option ng-value="SingleLineText">Single Line Text</option>
+				<option ng-value="MultiLineText">Multi Line Text</option>
+				<option ng-value="Date">Date Field</option>
+				<option ng-value="Dropdown">Dropdown Field</option>
+				<option ng-value="Checkboxes">Checkboxes Field</option>
+				<option ng-value="RadioButtons">Radio buttons Field</option>
+			</select>
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="button" ng-click="model.addField(model.fieldType)"><span class="glyphicon glyphicon-plus"></span></button>
+			</span>
+		</div>
+	</div>
+</form>
