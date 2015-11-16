@@ -15,7 +15,8 @@ module.exports = function (app) {
 		findAllFormFields: findAllFormFields,
 		createFormField: createFormField,
 		deleteFormField: deleteFormField,
-		findFormField: findFormField
+		findFormField: findFormField,
+		updateFormField: updateFormField
 	};
 
 	return api;
@@ -24,7 +25,6 @@ module.exports = function (app) {
 		var form = newForm;
 		form.id = uuid.v1();
 
-		console.log(form);
 		forms.push(form);
 
 		return forms;
@@ -131,5 +131,13 @@ module.exports = function (app) {
 		}
 
 		return forms.fields;
+	}
+
+	function updateFormField (formId, fieldId, field) {
+		var toUpdate = findFormField(formId, fieldId);
+
+		toUpdate = field;
+
+		return toUpdate;
 	}
 };

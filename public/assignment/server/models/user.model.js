@@ -19,7 +19,7 @@ module.exports = function (app) {
 		var user = newUser;
 		user.id = uuid.v1();
 
-		console.log(user);
+		// console.log(user);
 		users.push(newUser);
 
 		return users;

@@ -4,7 +4,7 @@ module.exports = function (app, model) {
 	app.post("/api/assignment/form/:formId/field", createFormField);
 	app.get("/api/assignment/form/:formId/field/:fieldId", findFormField);
 	app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFormField);
-	// app.put("/api/assignment/form/:formId/field/:fieldId", updateFormField);
+	app.put("/api/assignment/form/:formId/field/:fieldId", updateFormField);
 
 	function findAllFormFields (req, res) {
 		// console.log("Test");
@@ -32,5 +32,13 @@ module.exports = function (app, model) {
 		var fieldId = req.params.fieldId;
 
 		res.json(model.deleteFormField(formId, fieldId));
+	}
+
+	function updateFormField (req, res) {
+		var formId = req.params.formId;
+		var fieldId = req.params.fieldId;
+		var field = req.body;
+
+		res.json(model.updateFormField(formId, fieldId, field));
 	}
 };

@@ -8,14 +8,15 @@
 	function FieldService ($http, $q) {
 
 		var api = {
-			findAllFormFields : findAllFormFields,
-			findFormField: findFormField,
-			createFormField : createFormField,
-			deleteFormField : deleteFormField
+			getFieldsForForm : getFieldsForForm,
+			getFieldForForm: getFieldForForm,
+			createFieldForForm : createFieldForForm,
+			deleteFieldFromForm : deleteFieldFromForm,
+			updateField: updateField
 		};
 		return api;
 
-		function findAllFormFields (formId) {
+		function getFieldsForForm (formId) {
 			var deferred = $q.defer();
 			
 			$http
@@ -27,7 +28,7 @@
 			return deferred.promise;
 		}
 
-		function findFormField (formId, fieldId) {
+		function getFieldForForm (formId, fieldId) {
 			var deferred = $q.defer();
 			
 			$http
@@ -39,7 +40,7 @@
 			return deferred.promise;	
 		}
 
-		function createFormField (formId, newField) {
+		function createFieldForForm (formId, newField) {
 			var deferred = $q.defer();
 
 			$http
@@ -51,7 +52,7 @@
 			return deferred.promise;
 		}
 
-		function deleteFormField (formId, fieldId) {
+		function deleteFieldFromForm (formId, fieldId) {
 			var deferred = $q.defer();
 
 			$http
@@ -60,6 +61,18 @@
 				deferred.resolve(feilds);
 			});
 
+			return deferred.promise;
+		}
+
+		function updateField (formId, fieldId, field) {
+			var deferred = $q.defer();
+
+			$http
+			.put("/api/assignment/form/" + formId + "/field/" + fieldId, field)
+			.success(function (field) {
+				deferred.resolve(field);
+			});
+			
 			return deferred.promise;
 		}
 	}

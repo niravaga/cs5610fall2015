@@ -14,6 +14,7 @@
 			deleteUserById : deleteUserById,
 			updateUser : updateUser
 		};
+		
 		return api;
 
 		function createUser (newUser) {

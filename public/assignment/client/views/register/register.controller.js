@@ -21,7 +21,7 @@
 			UserService
 			.findUserByUsernameAndPassword(model.newUser.username, model.newUser.password)
 			.then(function(user) {
-				console.log(user);
+				// console.log(user);
 				$rootScope.loggedInUser = user;	
 				$location.url("/profile");
 			});

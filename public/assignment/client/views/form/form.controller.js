@@ -14,7 +14,6 @@
 
 		currUser = $rootScope.loggedInUser;
 		model.user = currUser;
-		console.log(model.user);
 
 		function init() {
 			FormService

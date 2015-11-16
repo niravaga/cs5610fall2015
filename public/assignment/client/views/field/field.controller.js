@@ -13,9 +13,15 @@
 		model.addField = addField;
 		model.removeField = removeField;
 
+		FormService
+		.findFormById(formId)
+		.then(function (form) {
+			model.form = form;
+		});
+
 		function init () {
 			FieldService
-			.findAllFormFields(formId)
+			.getFieldsForForm(formId)
 			.then(initFields);
 		}
 
@@ -89,14 +95,14 @@
 			}
 			
 			FieldService
-			.createFormField(formId, newField)
+			.createFieldForForm(formId, newField)
 			.then(init);
 		}
 
 		function removeField (fieldId) {
 
 			FieldService
-			.deleteFormField(formId, fieldId)
+			.deleteFieldFromForm(formId, fieldId)
 			.then(init);
 		}
 	}

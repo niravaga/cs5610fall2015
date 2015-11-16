@@ -1,10 +1,8 @@
-<h1 class="page-header">{{model.form.title}}</h1>
+<h1 class="page-header">Forms: {{model.form.title}}</h1>
 
 <ul class="nav nav-tabs">
-	<ul class="nav nav-tabs">
-		<li ng-class="{'active' : $location.url().indexOf('forms') != -1}"><a href="#/forms">Forms</a></li>
-		<li ng-class="{'active' : $location.url().indexOf('fields') != -1}"><a href="#/">Fields</a></li>
-	</ul>
+	<li role="presentation"><a href="#/form">Forms</a></li>
+	<li class="active" role="presentation"><a href="#/form/field">Fields</a></li>
 </ul>
 
 <form>

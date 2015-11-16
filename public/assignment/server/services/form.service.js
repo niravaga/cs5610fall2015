@@ -5,7 +5,6 @@ module.exports = function (app, model) {
 	app.get("/api/assignment/form/:formId", findFormById);
 	app.put("/api/assignment/form/:formId", updateForm);
 	app.get("/api/assignment/user/:userId/form", findFormsByUser);
-	
 	app.delete("/api/assignment/form/:formId", deleteFormById);
 	
 	function createForm(req, res) {
