@@ -17,7 +17,7 @@ module.exports = function (app, model) {
 		var password = req.query.password;
 
 		if (typeof username != 'undefined') {
-			if (password) {
+			if (typeof password != 'undefined') {
 				var credentials = {
 					username: username,
 					password: password
