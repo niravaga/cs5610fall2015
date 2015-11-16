@@ -29,7 +29,7 @@
 
 		function addForm() {
 			var newForm = model.newForm;
-			newForm.feilds = [];
+			newForm.fields = [];
 			
 			FormService.createFormForUser(currUser.id, newForm)
 			.then(formAdded);

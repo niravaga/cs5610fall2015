@@ -12,7 +12,9 @@ module.exports = function (app) {
 		deleteFormById: deleteFormById,
 		findFormByTitle: findFormByTitle,
 		findFormsByUser: findFormsByUser,
-		findAllFormFields: findAllFormFields
+		findAllFormFields: findAllFormFields,
+		createFormField: createFormField,
+		deleteFormField: deleteFormField,
 	};
 
 	return api;
@@ -89,11 +91,36 @@ module.exports = function (app) {
 	}
 
 	function findAllFormFields (formId) {
-		var formFeilds = [];
-
 		var form = findFormById(formId);
 
 		// console.log(form.fields);
 		return form.fields;
 	}
+
+	function createFormField (formId, field) {
+		var form = findFormById(formId);
+
+		field.id = uuid.v1();
+
+		form.fields.push(field);
+
+		return form.fields;
+	}
+
+	function deleteFormField (formId, fieldId) {
+		var form = findFormById(formId);
+
+		for(var i in form.fields) {
+			var thisField = form.fields[i];
+
+			if (thisField["id"] == fieldId) {
+				form.fields.splice(i, 1);
+				break;
+			}
+		}
+
+		return forms.fields;
+	}
+
+
 };

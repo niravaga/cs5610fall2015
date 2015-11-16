@@ -26,7 +26,7 @@
 			return deferred.promise;
 		}
 
-		function createFormField (formId, feild) {
+		function createFormField (formId, newField) {
 			var deferred = $q.defer();
 
 			$http
@@ -38,7 +38,7 @@
 			return deferred.promise;
 		}
 
-		function deleteFormField (formId, feildId) {
+		function deleteFormField (formId, fieldId) {
 			var deferred = $q.defer();
 
 			$http
