@@ -10,6 +10,7 @@
 		model.updateForm = updateForm;
 		model.selectForm = selectForm;
 		model.deleteForm = deleteForm;
+		model.updateForm = updateForm;
 
 		currUser = $rootScope.loggedInUser;
 		model.user = currUser;
@@ -36,13 +37,22 @@
 		}
 
 		
-		function updateForm (updatedForm) {
-			
+		function updateForm () {
+			var updatedForm = model.newForm;
+			var formId = updatedForm.id;
+
+			FormService
+			.updateFormById(formId, updatedForm)
+			.then(init);
 		}
 
 
-		function selectForm (index) {
-			
+		function selectForm (formId) {
+			FormService
+			.findFormById(formId)
+			.then(function (form) {
+				model.newForm = form;
+			});
 		}
 
 		function deleteForm (formId) {

@@ -32,7 +32,7 @@ module.exports = function (app, model) {
 		var formId = req.params.formId;
 		var updatedForm = req.body;
 
-		res.json(model.updateForm(id, updatedForm));
+		res.json(model.updateForm(formId, updatedForm));
 	}
 
 	function findFormsByUser (req, res) {
@@ -45,22 +45,6 @@ module.exports = function (app, model) {
 		var formId = req.params.formId;
 
 		res.json(model.deleteFormById(formId));
-	}
-	
-	function findFormFieldById(req, res) {
-		
-	}
-	
-	function deleteFormFieldById(req, res) {
-		
-	}
-	
-	function addFormField(req, res) {
-		
-	}
-	
-	function updateFormField(req, res) {
-		
 	}
 };
 

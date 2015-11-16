@@ -12,7 +12,7 @@
 			findAllFormsForUser : findAllFormsForUser,
 			deleteFormById : deleteFormById,
 			updateFormById : updateFormById,
-			findFormByFormId : findFormByFormId
+			findFormById : findFormById
 		};
 		return api;
 
@@ -64,7 +64,7 @@
 			return deferred.promise;
 		}
 
-		function findFormByFormId (formId) {
+		function findFormById (formId) {
 			var deferred = $q.defer();
 
 			$http
