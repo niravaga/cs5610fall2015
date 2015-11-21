@@ -24,7 +24,7 @@ module.exports = function (app, model) {
 				};
 
 				res.json(model.findUserByCredentials(credentials));
-			} 
+			}
 			else {
 				res.json(model.findUserByUsername(username));
 			}

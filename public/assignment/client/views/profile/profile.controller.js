@@ -1,13 +1,13 @@
 (function () {
 	angular
-	.module("FormBuilderApp")
-	.controller("ProfileController", ProfileController)
+		.module("FormBuilderApp")
+		.controller("ProfileController", ProfileController)
 
-	function ProfileController ($rootScope, UserService) {
-		
+	function ProfileController($rootScope, UserService) {
+
 		var model = this;
 		model.loggedInUser = $rootScope.loggedInUser;
-		
+
 		model.update = update;
 
 		function update() {
@@ -15,10 +15,10 @@
 			var id = updatedUser.id;
 
 			UserService.updateUser(id, updatedUser)
-			.then(function (response) {
-				console.log(response);
-			});
+				.then(function (response) {
+					console.log(response);
+				});
 		}
 
 	}
-}) ();
+})();

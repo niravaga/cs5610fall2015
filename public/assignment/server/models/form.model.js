@@ -21,7 +21,7 @@ module.exports = function (app) {
 
 	return api;
 
-	function createForm (newForm) {
+	function createForm(newForm) {
 		var form = newForm;
 		form.id = uuid.v1();
 
@@ -30,26 +30,26 @@ module.exports = function (app) {
 		return forms;
 	}
 
-	function createFormForUser (userId, newForm) {
+	function createFormForUser(userId, newForm) {
 		newForm.userId = userId;
 
 		return createForm(newForm);
 	}
 
-	function findAllForms () {
+	function findAllForms() {
 		return forms;
 	}
 
-	function findFormById (id) {
-		for(var i in forms) {
+	function findFormById(id) {
+		for (var i in forms) {
 			if (forms[i].id == id) {
 				return forms[i];
 			}
 		}
 	}
 
-	function updateForm (id, updatedForm) {
-		for(var i in forms) {
+	function updateForm(id, updatedForm) {
+		for (var i in forms) {
 			if (forms[i].id == id) {
 				forms[i] = updatedForm;
 				break;
@@ -59,8 +59,8 @@ module.exports = function (app) {
 		return updatedForm;
 	}
 
-	function deleteFormById (id) {
-		for(var i in forms) {
+	function deleteFormById(id) {
+		for (var i in forms) {
 			if (forms[i].id == id) {
 				forms.splice(i, 1);
 				break;
@@ -71,18 +71,18 @@ module.exports = function (app) {
 
 	}
 
-	function findFormByTitle (title) {
-		for(var i in forms) {
+	function findFormByTitle(title) {
+		for (var i in forms) {
 			if (forms[i].title == title) {
 				return forms[i];
 			}
 		}
 	}
-	
-	function findFormsByUser (userId) {
+
+	function findFormsByUser(userId) {
 		var userForms = [];
 
-		for(var i in forms) {
+		for (var i in forms) {
 			if (forms[i].userId == userId) {
 				userForms.push(forms[i]);
 			}
@@ -91,14 +91,14 @@ module.exports = function (app) {
 		return userForms;
 	}
 
-	function findAllFormFields (formId) {
+	function findAllFormFields(formId) {
 		var form = findFormById(formId);
 
 		// console.log(form.fields);
 		return form.fields;
 	}
 
-	function createFormField (formId, field) {
+	function createFormField(formId, field) {
 		var form = findFormById(formId);
 
 		field.id = uuid.v1();
@@ -108,7 +108,7 @@ module.exports = function (app) {
 		return form.fields;
 	}
 
-	function findFormField (formId, fieldId) {
+	function findFormField(formId, fieldId) {
 		var fields = findAllFormFields(formId);
 
 		for (var i in fields) {
@@ -118,10 +118,10 @@ module.exports = function (app) {
 		}
 	}
 
-	function deleteFormField (formId, fieldId) {
+	function deleteFormField(formId, fieldId) {
 		var form = findFormById(formId);
 
-		for(var i in form.fields) {
+		for (var i in form.fields) {
 			var thisField = form.fields[i];
 
 			if (thisField.id == fieldId) {
@@ -133,7 +133,7 @@ module.exports = function (app) {
 		return forms.fields;
 	}
 
-	function updateFormField (formId, fieldId, field) {
+	function updateFormField(formId, fieldId, field) {
 		var toUpdate = findFormField(formId, fieldId);
 
 		toUpdate = field;

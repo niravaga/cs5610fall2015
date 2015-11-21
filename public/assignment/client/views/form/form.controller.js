@@ -1,10 +1,10 @@
-(function() {
+(function () {
 	angular
-	.module("FormBuilderApp")
-	.controller("FormController", FormController);
+		.module("FormBuilderApp")
+		.controller("FormController", FormController);
 
-	function FormController ($rootScope, FormService) {
-		
+	function FormController($rootScope, FormService) {
+
 		var model = this;
 		model.addForm = addForm;
 		model.updateForm = updateForm;
@@ -17,47 +17,47 @@
 
 		function init() {
 			FormService
-			.findAllFormsForUser(currUser.id)
-			.then(foundForms);	
+				.findAllFormsForUser(currUser.id)
+				.then(foundForms);
 		}
-		
+
 		init();
 
-		function foundForms (userForms) {
+		function foundForms(userForms) {
 			model.forms = userForms;
 		}
 
 		function addForm() {
 			var newForm = model.newForm;
 			newForm.fields = [];
-			
+
 			FormService.createFormForUser(currUser.id, newForm)
-			.then(formAdded);
+				.then(formAdded);
 		}
 
-		
-		function updateForm () {
+
+		function updateForm() {
 			var updatedForm = model.newForm;
 			var formId = updatedForm.id;
 
 			FormService
-			.updateFormById(formId, updatedForm)
-			.then(init);
+				.updateFormById(formId, updatedForm)
+				.then(init);
 		}
 
 
-		function selectForm (formId) {
+		function selectForm(formId) {
 			FormService
-			.findFormById(formId)
-			.then(function (form) {
-				model.newForm = form;
-			});
+				.findFormById(formId)
+				.then(function (form) {
+					model.newForm = form;
+				});
 		}
 
-		function deleteForm (formId) {
+		function deleteForm(formId) {
 			FormService
-			.deleteFormById(formId)
-			.then(init);
+				.deleteFormById(formId)
+				.then(init);
 		}
 
 		function formAdded(forms) {
@@ -65,4 +65,4 @@
 			model.newForm = {};
 		}
 	}
-}) ();
+})();

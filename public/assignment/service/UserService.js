@@ -1,10 +1,10 @@
 (function () {
 	angular
-	.module("FormBuilderApp")
-	.factory("UserService", UserService);
+		.module("FormBuilderApp")
+		.factory("UserService", UserService);
 
 	function UserService() {
-		
+
 		var user1 = {
 			id: 10,
 			userName: "nirav",
@@ -24,7 +24,7 @@
 
 		function findUserByUsernameAndPassword(findUserName, findPassword, callback) {
 			for (var i in users) {
-				if((users[i].userName == findUserName) && (users[i].password == findPassword)) {
+				if ((users[i].userName == findUserName) && (users[i].password == findPassword)) {
 					callback(users[i]);
 					return;
 				}
@@ -43,9 +43,9 @@
 		}
 
 		function deleteUserById(userId, callback) {
-			for(var i in users) {
+			for (var i in users) {
 				if (users[i].id = userId) {
-					users.splice(i,1);
+					users.splice(i, 1);
 				}
 			}
 
@@ -53,9 +53,9 @@
 		}
 
 		function updateUser(userId, newUser, callback) {
-			for(var i in users) {
-				if(users[i].id == userId) {
-					users.splice(i,1);
+			for (var i in users) {
+				if (users[i].id == userId) {
+					users.splice(i, 1);
 					newUser.id = userId;
 					users.push(newUser);
 				}
@@ -68,12 +68,12 @@
 		function guid() {
 			function s4() {
 				return Math.floor((1 + Math.random()) * 0x10000)
-				.toString(16)
-				.substring(1);
+					.toString(16)
+					.substring(1);
 			}
 
 			return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-			s4() + '-' + s4() + s4() + s4();
+				s4() + '-' + s4() + s4() + s4();
 		}
 
 		return service;

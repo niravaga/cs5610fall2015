@@ -26,9 +26,10 @@
 						<input class="form-control" type="date">
 					</div>
 					<div ng-switch-when="RADIOS">
-						<div class = "radio">
+						<div class="radio">
 							<div ng-repeat="option in field.options">
-								<label><input type="radio" name="{{field.label}}" value="{{option.value}}">{{option.label}}</label>
+								<label>
+									<input type="radio" name="{{field.label}}" value="{{option.value}}">{{option.label}}</label>
 							</div>
 						</div>
 					</div>
@@ -48,10 +49,15 @@
 					</div>
 				</div>
 				<span class="input-group-btn">
-					<a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-pencil"></span></button></a>
-					<a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button></a>
-					<button class="btn btn-default" type="button" ng-click="model.removeField(field.id)"><span class="glyphicon glyphicon-remove"></span></button>
-					<a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-align-justify"></span></button></a>
+					<a href="#"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-pencil"></span></button>
+				</a>
+				<a href="#">
+					<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+				</a>
+				<button class="btn btn-default" type="button" ng-click="model.removeField(field.id)"><span class="glyphicon glyphicon-remove"></span></button>
+				<a href="#">
+					<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-align-justify"></span></button>
+				</a>
 				</span>
 			</div>
 		</div>

@@ -1,12 +1,12 @@
 (function () {
-	
+
 	angular
-	.module("FormBuilderApp")
-	.controller("LoginController", LoginController);
+		.module("FormBuilderApp")
+		.controller("LoginController", LoginController);
 
 	function LoginController($location, $rootScope, UserService) {
-		
-		
+
+
 		var model = this;
 		model.login = login;
 
@@ -18,15 +18,15 @@
 			var password = model.password;
 			// console.log($scope.username);
 			UserService
-			.findUserByUsernameAndPassword(username, password)
-			.then(foundUser);
+				.findUserByUsernameAndPassword(username, password)
+				.then(foundUser);
 		}
 
-		function foundUser (user) {
+		function foundUser(user) {
 			$rootScope.loggedInUser = user;
 			// console.log(user);
 			$location.url("/profile");
 		}
 	}
-	
-}) ();
+
+})();

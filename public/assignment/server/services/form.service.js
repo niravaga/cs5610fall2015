@@ -6,41 +6,41 @@ module.exports = function (app, model) {
 	app.put("/api/assignment/form/:formId", updateForm);
 	app.get("/api/assignment/user/:userId/form", findFormsByUser);
 	app.delete("/api/assignment/form/:formId", deleteFormById);
-	
+
 	function createForm(req, res) {
 		var newForm = req.body;
 		res.json(model.createForm(newForm));
 	}
 
-	function createFormForUser (req, res) {
+	function createFormForUser(req, res) {
 		var newForm = req.body;
 		var userId = req.params.userId;
 		res.json(model.createFormForUser(userId, newForm));
 	}
 
-	function findAllForms (req, res) {
+	function findAllForms(req, res) {
 		res.json(model.findAllForms());
 	}
 
-	function findFormById (req, res) {
+	function findFormById(req, res) {
 		var formId = req.params.formId;
 		res.json(model.findFormById(formId));
 	}
 
-	function updateForm (req, res) {
+	function updateForm(req, res) {
 		var formId = req.params.formId;
 		var updatedForm = req.body;
 
 		res.json(model.updateForm(formId, updatedForm));
 	}
 
-	function findFormsByUser (req, res) {
+	function findFormsByUser(req, res) {
 		var userId = req.params.userId;
-		
-		res.json(model.findFormsByUser(userId));		
+
+		res.json(model.findFormsByUser(userId));
 	}
 
-	function deleteFormById (req, res) {
+	function deleteFormById(req, res) {
 		var formId = req.params.formId;
 
 		res.json(model.deleteFormById(formId));
