@@ -11,12 +11,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
-var mongo_url = process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost/cs5610example';
+var mongo_url = process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost/cs5610';
+console.log(mongo_url);
 mongoose.connect(mongo_url);
 var db = mongoose.connection;
 
 
 require("./public/experiments/mongo/server/app.js")(app, mongoose, db);
-require("./public/assignment/server/app.js")(app);
+require("./public/assignment/server/app.js")(app, mongoose, db);
 
 app.listen(port, ipaddress);

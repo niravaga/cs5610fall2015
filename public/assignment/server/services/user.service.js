@@ -9,7 +9,11 @@ module.exports = function (app, model) {
 
 	function createUser(req, res) {
 		var newUser = req.body;
-		res.json(model.createUser(newUser));
+		model
+			.createUser(newUser)
+			.then(function (users) {
+				res.json(users);
+			});
 	}
 
 	function findUsers(req, res) {
@@ -23,20 +27,36 @@ module.exports = function (app, model) {
 					password: password
 				};
 
-				res.json(model.findUserByCredentials(credentials));
+				model
+					.findUserByCredentials(credentials)
+					.then(function (user) {
+						res.json(user);
+					});
 			}
 			else {
-				res.json(model.findUserByUsername(username));
+				model
+					.findUserByUsername(username)
+					.then(function (user) {
+						res.json(user);
+					});
 			}
 		}
 		else {
-			res.json(model.findAllUsers());
+			model
+				.findAllUsers()
+				.then(function (users) {
+					res.json(users);
+				});
 		}
 	}
 
 	function findUserById(req, res) {
 		var id = req.params.id;
-		res.json(model.findUserById(id));
+		model
+			.findUserById(id)
+			.then(function (user) {
+				res.json(user);
+			});
 	}
 
 	// function findUserByUsername(req, res) {
@@ -56,11 +76,19 @@ module.exports = function (app, model) {
 	function updateUser(req, res) {
 		var id = req.params.id;
 		var updatedUser = req.body;
-		res.json(model.updateUser(id, updatedUser));
+		model
+			.updateUser(id, updatedUser)
+			.then(function (user) {
+				res.json(user);
+			});
 	}
 
 	function deleteUser(req, res) {
 		var id = req.params.id;
-		res.json(model.deleteUser(id));
+		model
+			.deleteUser(id)
+			.then(function (users) {
+				res.json(users);
+			});
 	}
 };

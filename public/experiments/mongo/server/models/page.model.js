@@ -55,7 +55,7 @@ module.exports = function (mongoose, db) {
 		
 		PageModel.findById(id, function (err, page) {
 			deferred.resolve(page);
-			});
+		});
 
 		return deferred.promise;
 	}
@@ -74,5 +74,5 @@ module.exports = function (mongoose, db) {
 			});
 		});
 	}
-		
+	
 };
