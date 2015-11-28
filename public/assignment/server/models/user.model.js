@@ -9,6 +9,7 @@ module.exports = function (mongoose, db) {
 		"lastName": String,
 		"username": String,
 		"password": String,
+		"email": String,
 		"created": { type: Date, default: Date.now },
 	}, { collection: "cs5610.assignment/user" });
 
@@ -66,6 +67,7 @@ module.exports = function (mongoose, db) {
 			user.lastName = updatedUser.lastName;
 			user.username = updatedUser.username;
 			user.password = updatedUser.password;
+			user.email = updatedUser.email;
 
 			user.save(function (err, newUser) {
 				deferred.resolve(newUser);
