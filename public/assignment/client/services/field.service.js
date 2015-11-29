@@ -28,7 +28,7 @@
 			return deferred.promise;
 		}
 
-		function getFieldForForm(formId, fieldId) {
+		function getFieldForForm(formId, fieldIndex) {
 			var deferred = $q.defer();
 
 			$http
@@ -52,11 +52,11 @@
 			return deferred.promise;
 		}
 
-		function deleteFieldFromForm(formId, fieldId) {
+		function deleteFieldFromForm(formId, fieldIndex) {
 			var deferred = $q.defer();
 
 			$http
-				.delete("/api/assignment/form/" + formId + "/field/" + fieldId)
+				.delete("/api/assignment/form/" + formId + "/field/" + fieldIndex)
 				.success(function (feilds) {
 					deferred.resolve(feilds);
 				});
@@ -64,11 +64,11 @@
 			return deferred.promise;
 		}
 
-		function updateField(formId, fieldId, field) {
+		function updateField(formId, fieldIndex, field) {
 			var deferred = $q.defer();
 
 			$http
-				.put("/api/assignment/form/" + formId + "/field/" + fieldId, field)
+				.put("/api/assignment/form/" + formId + "/field/" + fieldIndex, field)
 				.success(function (field) {
 					deferred.resolve(field);
 				});

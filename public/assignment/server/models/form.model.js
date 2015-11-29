@@ -173,26 +173,44 @@ module.exports = function (mongoose, db) {
 		}
 	}
 
-	function deleteFormField(formId, fieldId) {
-		var form = findFormById(formId);
+	function deleteFormField(formId, fieldIndex) {
+		var deferred = q.defer();
 
-		for (var i in form.fields) {
-			var thisField = form.fields[i];
+		FormModel.findById(formId, function (err, form) {
+			form.fields.splice(fieldIndex, 1);
 
-			if (thisField.id == fieldId) {
-				form.fields.splice(i, 1);
-				break;
-			}
-		}
+			console.log(form);
 
-		return forms.fields;
+			form.save(function (err, form) {
+				if (err) {
+					deferred.reject(err);
+				} else {
+					deferred.resolve(form);
+				}
+			});
+		});
+
+		return deferred.promise;
 	}
 
-	function updateFormField(formId, fieldId, field) {
-		var toUpdate = findFormField(formId, fieldId);
+	function updateFormField(formId, fieldIndex, field) {
+		var deferred = q.defer();
 
-		toUpdate = field;
-
-		return toUpdate;
+		FormModel.findById(formId, function (err, form) {
+			if (err) {
+				deferred.reject(err);
+			} else {
+				form.fields[fieldIndex].literal = field.literal;
+				form.save(function (err, form) {
+					if (err) {
+						deferred.reject(err);
+					} else {
+						deferred.resolve(form);
+					}
+				});
+			}
+		});
+		
+		return deferred.promise;
 	}
 };

@@ -99,10 +99,10 @@
 				.then(init);
 		}
 
-		function removeField(fieldId) {
+		function removeField(fieldIndex) {
 
 			FieldService
-				.deleteFieldFromForm(formId, fieldId)
+				.deleteFieldFromForm(formId, fieldIndex)
 				.then(init);
 		}
 	}
