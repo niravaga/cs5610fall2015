@@ -12,12 +12,12 @@
 		model.deleteForm = deleteForm;
 		model.updateForm = updateForm;
 
-		currUser = $rootScope.loggedInUser;
+		var currUser = $rootScope.loggedInUser;
 		model.user = currUser;
 
 		function init() {
 			FormService
-				.findAllFormsForUser(currUser.id)
+				.findAllFormsForUser(currUser._id)
 				.then(foundForms);
 		}
 
@@ -31,14 +31,14 @@
 			var newForm = model.newForm;
 			newForm.fields = [];
 
-			FormService.createFormForUser(currUser.id, newForm)
+			FormService.createFormForUser(currUser._id, newForm)
 				.then(formAdded);
 		}
 
 
 		function updateForm() {
 			var updatedForm = model.newForm;
-			var formId = updatedForm.id;
+			var formId = updatedForm._id;
 
 			FormService
 				.updateFormById(formId, updatedForm)

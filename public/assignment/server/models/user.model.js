@@ -1,18 +1,10 @@
-var users = require("./user.mock.json");
+// var users = require("./user.mock.json");
 var uuid = require("node-uuid");
 var q = require("q");
 
 module.exports = function (mongoose, db) {
 
-	var UserSchema = mongoose.Schema({
-		"firstName": String,
-		"lastName": String,
-		"username": String,
-		"password": String,
-		"email": String,
-		"created": { type: Date, default: Date.now },
-	}, { collection: "cs5610.assignment/user" });
-
+	var UserSchema = require("./user.schema.js")(mongoose);
 	var UserModel = mongoose.model("UserModel", UserSchema);
 
 	var api = {
@@ -32,7 +24,11 @@ module.exports = function (mongoose, db) {
 
 		UserModel.create(newUser, function (err, doc) {
 			UserModel.find(function (err, users) {
-				deferred.resolve(users);
+				if (err) {
+					deferred.reject(err);
+				} else {
+					deferred.resolve(users);
+				}
 			});
 		});
 
@@ -43,7 +39,11 @@ module.exports = function (mongoose, db) {
 		var deferred = q.defer();
 
 		UserModel.find(function (err, users) {
-			deferred.resolve(users);
+			if (err) {
+				deferred.reject(err);
+			} else {
+				deferred.resolve(users);
+			}
 		});
 
 		return deferred.promise;
@@ -53,7 +53,11 @@ module.exports = function (mongoose, db) {
 		var deferred = q.defer();
 
 		UserModel.findById(id, function (err, user) {
-			deferred.resolve(user);
+			if (err) {
+				deferred.reject(err);
+			} else {
+				deferred.resolve(user);
+			}
 		});
 
 		return deferred.promise;
@@ -62,17 +66,16 @@ module.exports = function (mongoose, db) {
 	function updateUser(id, updatedUser) {
 		var deferred = q.defer();
 
-		UserModel.findById(id, function (err, user) {
-			user.firstName = updatedUser.firstName;
-			user.lastName = updatedUser.lastName;
-			user.username = updatedUser.username;
-			user.password = updatedUser.password;
-			user.email = updatedUser.email;
+		updatedUser.delete("_id");
 
-			user.save(function (err, newUser) {
-				deferred.resolve(newUser);
+		UserModel.update({ _id: id }, { $set: updatedUser },
+			function (err, user) {
+				if (err) {
+					deferred.reject(err);
+				} else {
+					deferred.resolve(user);
+				}
 			});
-		});
 
 		return deferred.promise;
 	}
@@ -80,9 +83,13 @@ module.exports = function (mongoose, db) {
 	function deleteUser(id) {
 		var deferred = q.defer();
 
-		UserModel.remove({ '_id': id }, function (err, result) {
+		UserModel.remove({ _id: id }, function (err, result) {
 			UserModel.find(function (err, users) {
-				deferred.resolve(users);
+				if (err) {
+					deferred.reject(err);
+				} else {
+					deferred.resolve(users);
+				}
 			});
 		});
 
@@ -92,9 +99,15 @@ module.exports = function (mongoose, db) {
 	function findUserByUsername(username) {
 		var deferred = q.defer();
 
-		UserModel.findOne({ 'username': username }, function (err, user) {
-			deferred.resolve(user);
-		});
+		UserModel.findOne(
+			{ 'username': username },
+			function (err, user) {
+				if (err) {
+					deferred.reject(err);
+				} else {
+					deferred.resolve(user);
+				}
+			});
 
 		return deferred.promise;
 	}
@@ -103,11 +116,14 @@ module.exports = function (mongoose, db) {
 		var deferred = q.defer();
 
 		UserModel.findOne({
-			'username': credentials.username,
-			'password': credentials.password
+			username: credentials.username,
+			password: credentials.password
 		}, function (err, user) {
-			console.log(user);
-			deferred.resolve(user);
+			if (err) {
+				deferred.reject(err);
+			} else {
+				deferred.resolve(user);
+			}
 		});
 
 		return deferred.promise;

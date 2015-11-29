@@ -1,7 +1,11 @@
 var forms = require("./form.mock.json");
 var uuid = require("node-uuid");
+var q = require("q");
 
 module.exports = function (mongoose, db) {
+
+	var FormSchema = require("./form.schema.js")(mongoose);
+	var FormModel = mongoose.model("FormModel", FormSchema);
 
 	var api = {
 		createForm: createForm,
@@ -22,12 +26,19 @@ module.exports = function (mongoose, db) {
 	return api;
 
 	function createForm(newForm) {
-		var form = newForm;
-		form.id = uuid.v1();
+		var deferred = q.defer();
 
-		forms.push(form);
+		FormModel.create(newForm, function (err, doc) {
+			FormModel.create(function (err, forms) {
+				if (err) {
+					deferred.reject(err);
+				} else {
+					deferred.resolve(forms);
+				}
+			});
+		});
 
-		return forms;
+		return deferred.promise;
 	}
 
 	function createFormForUser(userId, newForm) {
@@ -37,75 +48,119 @@ module.exports = function (mongoose, db) {
 	}
 
 	function findAllForms() {
-		return forms;
+		var deferred = q.defer();
+
+		FormModel.find(function (err, forms) {
+			if (err) {
+				deferred.reject(err);
+			} else {
+				deferred.resolve(forms);
+			}
+		});
+
+		return deferred.promise;
 	}
 
 	function findFormById(id) {
-		for (var i in forms) {
-			if (forms[i].id == id) {
-				return forms[i];
+		var deferred = q.defer();
+
+		FormModel.findById(id, function (err, form) {
+			if (err) {
+				deferred.reject(err);
+			} else {
+				deferred.resolve(form);
 			}
-		}
+		});
+
+		return deferred.promise;
 	}
 
 	function updateForm(id, updatedForm) {
-		for (var i in forms) {
-			if (forms[i].id == id) {
-				forms[i] = updatedForm;
-				break;
-			}
-		}
+		var deferred = q.defer();
 
-		return updatedForm;
+		FormModel.update(
+			{ _id: id, },
+			function (err, newForm) {
+				if (err) {
+					deferred.reject(err);
+				} else {
+					deferred.resolve(newForm);
+				}
+			});
 	}
 
 	function deleteFormById(id) {
-		for (var i in forms) {
-			if (forms[i].id == id) {
-				forms.splice(i, 1);
-				break;
-			}
-		}
+		var deferred = q.defer();
 
-		return forms;
+		FormModel.remove({ _id: id }, function (err, status) {
+			if (err) {
+				deferred.reject(err);
+			} else {
+				deferred.resolve(status);
+			}
+		});
+
+		return deferred.promise;
 
 	}
 
 	function findFormByTitle(title) {
-		for (var i in forms) {
-			if (forms[i].title == title) {
-				return forms[i];
+		var deferred = q.defer();
+
+		FormModel.find({ title: title }, function (err, forms) {
+			if (err) {
+				deferred.reject(err);
+			} else {
+				deferred.resolve(forms);
 			}
-		}
+		});
+
+		return deferred.promise;
 	}
 
 	function findFormsByUser(userId) {
-		var userForms = [];
+		var deferred = q.defer();
 
-		for (var i in forms) {
-			if (forms[i].userId == userId) {
-				userForms.push(forms[i]);
-			}
-		}
+		FormModel.find({ userId: userId }, function (err, forms) {
+			deferred.resolve(forms);
+		});
 
-		return userForms;
+		return deferred.promise;
 	}
 
 	function findAllFormFields(formId) {
-		var form = findFormById(formId);
 
-		// console.log(form.fields);
-		return form.fields;
+		var deferred = q.defer();
+
+		FormModel.findById(formId, { "fields": 1, "_id": 0 }, function (err, fields) {
+			if (err) {
+				deferred.reject(err);
+			} else {
+				deferred.resolve(fields);
+			}
+		});
+		return deferred.promise;
 	}
 
 	function createFormField(formId, field) {
-		var form = findFormById(formId);
+		var deferred = q.defer();
 
-		field.id = uuid.v1();
+		FormModel.findById(formId, function (err, form) {
+			if (err) {
+				deferred.reject(err);
+			} else {
+				form.fields.push(field);
+				form.save(function (err, form) {
+					if (err) {
+						deferred.reject(err);
+					} else {
+						deferred.resolve(form);
+					}
+				});
+			}
+		});
 
-		form.fields.push(field);
-
-		return form.fields;
+		return deferred.promise;
 	}
 
 	function findFormField(formId, fieldId) {

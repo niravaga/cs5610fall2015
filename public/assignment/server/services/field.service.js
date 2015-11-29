@@ -10,7 +10,11 @@ module.exports = function (app, model) {
 		// console.log("Test");
 
 		var formId = req.params.formId;
-		res.json(model.findAllFormFields(formId));
+		model
+			.findAllFormFields(formId)
+			.then(function (fields) {
+				res.json(fields);
+			});
 	}
 
 	function createFormField(req, res) {
@@ -24,7 +28,7 @@ module.exports = function (app, model) {
 		var formId = req.params.formId;
 		var fieldId = req.params.fieldId;
 
-		res.json(model.findFormField(formId, field));
+		res.json(model.findFormField(formId, fieldId));
 	}
 
 	function deleteFormField(req, res) {

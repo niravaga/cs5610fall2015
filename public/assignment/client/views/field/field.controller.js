@@ -27,8 +27,8 @@
 
 		init();
 
-		function initFields(fields) {
-			model.fields = fields;
+		function initFields(response) {
+			model.fields = response.fields;
 		}
 
 		function addField(fieldType) {

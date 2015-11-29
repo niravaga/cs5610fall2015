@@ -9,41 +9,69 @@ module.exports = function (app, model) {
 
 	function createForm(req, res) {
 		var newForm = req.body;
-		res.json(model.createForm(newForm));
+		model
+			.createForm(newForm)
+			.then(function (form) {
+				res.json(form);
+			});
 	}
 
 	function createFormForUser(req, res) {
 		var newForm = req.body;
 		var userId = req.params.userId;
-		res.json(model.createFormForUser(userId, newForm));
+		model
+			.createFormForUser(userId, newForm)
+			.then(function (forms) {
+				res.json(forms);
+			});
 	}
 
 	function findAllForms(req, res) {
-		res.json(model.findAllForms());
+		model
+			.findAllForms()
+			.then(function (forms) {
+				res.json(forms);
+			});
 	}
 
 	function findFormById(req, res) {
 		var formId = req.params.formId;
-		res.json(model.findFormById(formId));
+		model
+			.findFormById(formId)
+			.then(function (form) {
+				res.json(form);
+			});
 	}
 
 	function updateForm(req, res) {
 		var formId = req.params.formId;
 		var updatedForm = req.body;
 
-		res.json(model.updateForm(formId, updatedForm));
+		model
+			.updateForm(formId, updatedForm)
+			.then(function (form) {
+				res.json(form);
+			});
 	}
 
 	function findFormsByUser(req, res) {
 		var userId = req.params.userId;
 
-		res.json(model.findFormsByUser(userId));
+		model
+			.findFormsByUser(userId)
+			.then(function (forms) {
+				res.json(forms);
+			});
 	}
 
 	function deleteFormById(req, res) {
 		var formId = req.params.formId;
 
-		res.json(model.deleteFormById(formId));
+		model
+			.deleteFormById(formId)
+			.then(function (forms) {
+				res.json(forms);
+			});
 	}
 };
 
