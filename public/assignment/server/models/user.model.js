@@ -22,6 +22,9 @@ module.exports = function (mongoose, db) {
 	function createUser(newUser) {
 		var deferred = q.defer();
 
+		if (newUser["_id"])
+			delete newUser["_id"];
+
 		UserModel.create(newUser, function (err, doc) {
 			UserModel.find(function (err, users) {
 				if (err) {
@@ -66,7 +69,7 @@ module.exports = function (mongoose, db) {
 	function updateUser(id, updatedUser) {
 		var deferred = q.defer();
 
-		updatedUser.delete("_id");
+		delete updatedUser["_id"];
 
 		UserModel.update({ _id: id }, { $set: updatedUser },
 			function (err, user) {

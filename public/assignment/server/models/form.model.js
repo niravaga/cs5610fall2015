@@ -1,4 +1,4 @@
-var forms = require("./form.mock.json");
+// var forms = require("./form.mock.json");
 var uuid = require("node-uuid");
 var q = require("q");
 
@@ -27,6 +27,9 @@ module.exports = function (mongoose, db) {
 
 	function createForm(newForm) {
 		var deferred = q.defer();
+
+		if (newForm["_id"])
+			delete newForm["_id"];
 
 		FormModel.create(newForm, function (err, doc) {
 			FormModel.create(function (err, forms) {
@@ -78,8 +81,10 @@ module.exports = function (mongoose, db) {
 	function updateForm(id, updatedForm) {
 		var deferred = q.defer();
 
+		delete updatedForm["_id"];
+
 		FormModel.update(
-			{ _id: id, },
+			{ _id: id, }, { $set: updatedForm },
 			function (err, newForm) {
 				if (err) {
 					deferred.reject(err);
@@ -87,6 +92,8 @@ module.exports = function (mongoose, db) {
 					deferred.resolve(newForm);
 				}
 			});
+
+		return deferred.promise;
 	}
 
 	function deleteFormById(id) {
@@ -139,6 +146,7 @@ module.exports = function (mongoose, db) {
 				deferred.resolve(fields);
 			}
 		});
+
 		return deferred.promise;
 	}
 
@@ -163,14 +171,22 @@ module.exports = function (mongoose, db) {
 		return deferred.promise;
 	}
 
-	function findFormField(formId, fieldId) {
-		var fields = findAllFormFields(formId);
+	function findFormField(formId, fieldIndex) {
 
-		for (var i in fields) {
-			if (fields[i].id == fieldId) {
-				return fields[i];
+		var deferred = q.defer();
+
+		FormModel.findById(formId, function (err, form) {
+			if (err) {
+				deferred.reject(err);
 			}
-		}
+			else {
+				deferred.resolve(form.fields[fieldIndex]);
+			}
+		});
+
+		return deferred.promise;
+
+
 	}
 
 	function deleteFormField(formId, fieldIndex) {
@@ -178,8 +194,6 @@ module.exports = function (mongoose, db) {
 
 		FormModel.findById(formId, function (err, form) {
 			form.fields.splice(fieldIndex, 1);
-
-			console.log(form);
 
 			form.save(function (err, form) {
 				if (err) {
@@ -210,7 +224,7 @@ module.exports = function (mongoose, db) {
 				});
 			}
 		});
-		
+
 		return deferred.promise;
 	}
 };

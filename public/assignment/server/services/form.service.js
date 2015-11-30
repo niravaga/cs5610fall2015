@@ -9,6 +9,7 @@ module.exports = function (app, model) {
 
 	function createForm(req, res) {
 		var newForm = req.body;
+
 		model
 			.createForm(newForm)
 			.then(function (form) {
@@ -19,6 +20,7 @@ module.exports = function (app, model) {
 	function createFormForUser(req, res) {
 		var newForm = req.body;
 		var userId = req.params.userId;
+
 		model
 			.createFormForUser(userId, newForm)
 			.then(function (forms) {
@@ -36,6 +38,7 @@ module.exports = function (app, model) {
 
 	function findFormById(req, res) {
 		var formId = req.params.formId;
+
 		model
 			.findFormById(formId)
 			.then(function (form) {

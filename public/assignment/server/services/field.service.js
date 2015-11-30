@@ -7,9 +7,8 @@ module.exports = function (app, model) {
 	app.put("/api/assignment/form/:formId/field/:fieldIndex", updateFormField);
 
 	function findAllFormFields(req, res) {
-		// console.log("Test");
-
 		var formId = req.params.formId;
+
 		model
 			.findAllFormFields(formId)
 			.then(function (fields) {
@@ -20,15 +19,23 @@ module.exports = function (app, model) {
 	function createFormField(req, res) {
 		var formId = req.params.formId;
 		var field = req.body;
-		// console.log(field);
-		res.json(model.createFormField(formId, field));
+
+		model
+			.createFormField(formId, field)
+			.then(function (field) {
+				res.json(field);
+			});
 	}
 
 	function findFormField(req, res) {
 		var formId = req.params.formId;
 		var fieldIndex = req.params.fieldIndex;
 
-		res.json(model.findFormField(formId, fieldIndex));
+		model
+			.findFormField(formId, fieldIndex)
+			.then(function (field) {
+				res.json(field);
+			});
 	}
 
 	function deleteFormField(req, res) {
