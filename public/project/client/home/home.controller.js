@@ -1,26 +1,38 @@
 (function() {
 	angular
 	.module("TripPlannerApp")
-	.controller("homeController", homeController);
+	.controller("HomeController", HomeController);
 
-	function homeController ($scope, $http, $location) {
-		$scope.hello = "Hello from the controller";
+	function HomeController ($scope, $http, $location, TripService) {
 		
-		$scope.createTrip = function () { 
-			console.log("Creating trip");
-			
-			var city = $scope.city;
-			$http.get("https://maps.googleapis.com/maps/api/geocode/json?address="+ city +"&key=AIzaSyBbtkDxjuDPKJJev18t5TEnAGn0t9h-YrQ")
-			.then(function (response) {
-				$scope.response = response;
-				$location.url("/trip-create");
-			})
-		}
+		var model = this;
 
-		$scope.searchTrips = function() {
-			console.log("Searching trips");
+		model.createTrip = createTrip;
 
-			$location.url("/trip-search")
+		function createTrip() { 
+			console.log("Creating trip for city" + model.city);
+
+			var trip = {city: model.city};
+
+			TripService
+			.createTrip(trip)
+			.then(function(trip) {
+				// console.log(trip._id);
+				$location.url("/trip-create/"+ trip._id);
+			});
+
+			// $http
+			// .get("https://maps.googleapis.com/maps/api/geocode/json?address="+ model.city +"&key=AIzaSyBbtkDxjuDPKJJev18t5TEnAGn0t9h-YrQ")
+			// .then(function (response) {
+			// 	$scope.response = response;
+			// 	// $location.url("/trip-create");
+			// });
+}
+
+$scope.searchTrips = function() {
+			// console.log("Searching trips");
+
+			// $location.url("/trip-search");
 		}
 	}
 })();

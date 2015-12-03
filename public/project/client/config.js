@@ -7,7 +7,7 @@
 		$routeProvider
 		.when("/home", {
 			templateUrl: "home/home.view.html",
-			controller: "homeController"
+			controller: "HomeController as model"
 		})
 		.when("/register", {
 			templateUrl: "register/register.view.html",
@@ -15,13 +15,13 @@
 		})
 		.when("/login", {
 			templateUrl: "login/login.view.html",
-			controller: "loginController"
+			controller: "loginController as model"
 		})
 		.when("/profile", {
 			templateUrl: "profile/profile.view.html",
-			controller: "profileController"
+			controller: "profileController as model"
 		})
-		.when("/trip-create", {
+		.when("/trip-create/:id", {
 			templateUrl: "trip/trip-create.view.html",
 			controller: "tripCreateController"
 		})

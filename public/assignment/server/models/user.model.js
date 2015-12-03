@@ -1,5 +1,5 @@
 // var users = require("./user.mock.json");
-var uuid = require("node-uuid");
+// var uuid = require("node-uuid");
 var q = require("q");
 
 module.exports = function (mongoose, db) {
