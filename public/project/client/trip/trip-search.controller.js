@@ -6,6 +6,7 @@
 	function tripSearchController($routeParams, TripService) {
 		var model = this;
 		var city = $routeParams.city;
+		model.city = city;
 
 		function init() {
 			TripService
