@@ -8,7 +8,8 @@ module.exports = function (mongoose, db) {
 		createTrip: createTrip,
 		findTripById: findTripById,
 		addDayToTrip: addDayToTrip,
-		addPlace: addPlace
+		addPlace: addPlace,
+		findAllTripsForCity: findAllTripsForCity
 	};
 
 	return api;
@@ -60,7 +61,7 @@ module.exports = function (mongoose, db) {
 
 		TripModel.findById(tripId, function (err, trip) {
 			trip.days[dayIndex].places.push(place);
-			
+
 			console.log(trip);
 			trip.save(function (err, trip) {
 				if (err)
@@ -83,6 +84,19 @@ module.exports = function (mongoose, db) {
 				deferred.resolve(trip);
 		});
 
+		return deferred.promise;
+	}
+
+	function findAllTripsForCity(city) {
+		var deferred = q.defer();
+
+		TripModel.find({ city: city }, function (err, trips) {
+			if (err)
+				deferred.reject(err);
+			else
+				deferred.resolve(trips);
+		});
+		
 		return deferred.promise;
 	}
 }

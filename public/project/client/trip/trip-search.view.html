@@ -3,39 +3,22 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>Name</th>
-			<th>No. of Places</th>
+			<th>City</th>
 			<th>No. of Days</th>
 			<th>Created By</th>
 			<th>Action</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>Scenic Trip</td>
-			<td>5</td>
-			<td>2</td>
-			<td>ABC</td>
+		<tr ng-repeat="trip in model.trips">
+			<td>
+				<a href="#/trip-create/{{trip._id}}">{{trip.city}}</a>
+				</td>
+			<td>{{trip.days.length}}</td>
+			<td>Username</td>
 			<td class="no-wrap">
 				<button ng-click= "" class="btn btn-default">
 					Use this trip
-				</button>
-				<button ng-click="deleteTrip()" type="button" class="btn btn-primary">
-					<span class="glyphicon glyphicon-share"></span>
-				</button>
-			</td>
-		</tr>
-		<tr>
-			<td>Adventurous tour</td>
-			<td>8</td>
-			<td>3</td>
-			<td>XYZ</td>
-			<td class="no-wrap">
-				<button ng-click= "" class="btn btn-default">
-					Use this trip
-				</button>
-				<button ng-click="deleteTrip()" type="button" class="btn btn-primary">
-					<span class="glyphicon glyphicon-share"></span>
 				</button>
 			</td>
 		</tr>

@@ -30,9 +30,9 @@
 			// });
 		}
 
-		function searchTrips () {
+		function searchTrips(city) {
 			console.log("Searching trips");
-			$location.url("/trip-search");
+			$location.url("/trip-search/" + city);
 		}
 	}
 })();

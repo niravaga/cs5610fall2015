@@ -11,6 +11,7 @@
 			findAllTrips: findAllTrips,
 			findTripById: findTripById,
 			findTripsByUsername: findTripsByUsername,
+			findAllTripsForCity: findAllTripsForCity,
 			addDayToTrip: addDayToTrip,
 			updateTrip: updateTrip,
 			deleteTrip: deleteTrip
@@ -68,10 +69,10 @@
 
 		function addDayToTrip(tripId) {
 			var deferred = $q.defer();
-			
+
 			console.log(tripId);
 			$http
-				.post("/api/project/trip/"+tripId+"/day/")
+				.post("/api/project/trip/" + tripId + "/day/")
 				.success(function (trip) {
 					deferred.resolve(trip);
 				});
@@ -81,6 +82,18 @@
 
 		function deleteTrip() {
 
+		}
+
+		function findAllTripsForCity(city) {
+			var deferred = $q.defer();
+
+			$http
+				.get("/api/project/trip/city/" + city)
+				.success(function (trips) {
+					deferred.resolve(trips);
+				});
+
+			return deferred.promise;
 		}
 
 	}

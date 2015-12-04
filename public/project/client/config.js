@@ -25,7 +25,7 @@
 				templateUrl: "trip/trip-create.view.html",
 				controller: "tripCreateController as model"
 			})
-			.when("/trip-search", {
+			.when("/trip-search/:city", {
 				templateUrl: "trip/trip-search.view.html",
 				controller: "tripSearchController as model"
 			})
