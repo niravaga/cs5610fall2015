@@ -1,33 +1,90 @@
 (function () {
 	angular
-	.module("TripPlannerApp")
-	.controller("tripCreateController", tripCreateController);
+		.module("TripPlannerApp")
+		.controller("tripCreateController", tripCreateController);
 
-	function tripCreateController ($scope, uiGmapGoogleMapApi) {
+	function tripCreateController($routeParams, uiGmapGoogleMapApi, TripService, PlaceService) {
 
-		var pos = {latitude: 47.6094497, longitude: -122.3418};
-		
-		uiGmapGoogleMapApi.then(showMap);
+		var model = this;
+		model.addPlace = addPlace;
+		model.addDay = addDay;
 
-		function showMap (maps) {
-			$scope.map = { center: pos, zoom: 8 };
+		var tripId = $routeParams.tripId;
+		var dayIndex = 0;
+		function init() {
+			TripService
+				.findTripById(tripId)
+				.then(function (trip) {
+					console.log(trip);
+					model.trip = trip;
+					initMap(trip);
+				});
+
+			function initMap(trip) {
+				PlaceService
+					.findPlace(trip.city)
+					.then(function (place) {
+						var location = place.data.results[0].geometry.location;
+
+						var center = {
+							latitude: location.lat,
+							longitude: location.lng
+						};
+
+						uiGmapGoogleMapApi.then(showMap);
+
+						function showMap(maps) {
+							console.log(center);
+							model.map = { center: center, zoom: 8 };
+						}
+					});
+			}
 		}
 
-		var marker1 = {
-			latitude: 47.6094497,
-			longitude: -122.3418,
-			title: "Pike Place Market",
-			id: 1
-		};
+		init();
 
-		var marker2 = {
-			latitude: 47.6205063,
-			longitude: -122.3492774,
-			title: "Space Needle",
-			id: 2
-		};
+		function refreshTrip() {
+			TripService
+				.findTripById(tripId)
+				.then(function (trip) {
+					model.trip = trip;
+				});
+		}
+		
+		function addDay() {
+			TripService
+				.addDayToTrip(model.trip._id)
+				.then(function (trip) {
+					dayIndex++;
+					refreshTrip();
+				});
+		}
 
-		$scope.markers = [marker1, marker2];
+		function addPlace(newPlace) {
+
+			var currPlace = { name: newPlace, placeId: " " };
+
+			PlaceService
+				.addPlace(model.trip._id, dayIndex, currPlace)
+				.then(function (trip) {
+					refreshTrip();
+				});
+		}
+		// var marker1 = {
+		// 	latitude: 47.6094497,
+		// 	longitude: -122.3418,
+		// 	title: "Pike Place Market",
+		// 	id: 1
+		// };
+
+		// var marker2 = {
+		// 	latitude: 47.6205063,
+		// 	longitude: -122.3492774,
+		// 	title: "Space Needle",
+		// 	id: 2
+		// };
+
+		// $scope.markers = [marker1, marker2];
 
 
 		// var pos2 = {lat: 47.6205063, lng: -122.3492774};
@@ -48,6 +105,6 @@
 		// 	map: map,
 		// 	title: "Space Needle"
 		// });
-}
+	}
 
-}) ();
+})();

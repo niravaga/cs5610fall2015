@@ -4,34 +4,43 @@
 <div class="row">
 	<div class="col-sm-7 col-md-7">
 		<div class="form-group">
-			<input type="text" class="form-control" placeHolder="Add places of interest">
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Day 1</h3>
-			</div>
-			<div class="panel-body">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						Pike Place Market
-						<div class="pull-right">8:00 AM</div>
-					</div>
-				</div>	
-			</div>
-			<div class="panel-body">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						Space Needle
-						<div class="pull-right">10:00 AM</div>
-					</div>
-				</div>	
+			<div class="input-group">
+				<input ng-model="model.newPlace" type="text" class="form-control" placeholder="Add places of interest">
+				<span class="input-group-btn">
+        			<button class="btn btn-default" type="button" ng-click="model.addPlace(model.newPlace)">
+					<span class="glyphicon glyphicon-plus"></span>
+				</button>
+				</span>
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-5 col-md-5">
-		<ui-gmap-google-map center='map.center' zoom='map.zoom'>
-		<ui-gmap-markers models="markers" coords="'self'" icon="'icon'">
-	</ui-gmap-markers>
-</ui-gmap-google-map>
+		<button class="btn btn-success" tyep="button" ng-click="model.addDay()">
+			Add Day
+		</button>
+	</div>
 </div>
+
+<div class="row">
+	<div class="col-sm-7 col-md-7">
+		<div ng-repeat="day in model.trip.days" class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Day {{$index+1}}</h3>
+			</div>
+			<div ng-repeat="place in day.places" class="panel-body">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						{{place.name}}
+						<div class="pull-right">TIME</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-5 col-md-5">
+		<ui-gmap-google-map center="model.map.center" zoom="model.map.zoom">
+			<!--<ui-gmap-markers models="markers" coords="'self'" icon="'icon'">-->
+			<!--</ui-gmap-markers>-->
+		</ui-gmap-google-map>
+	</div>
 </div>

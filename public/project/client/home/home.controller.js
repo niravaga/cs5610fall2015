@@ -1,25 +1,26 @@
-(function() {
+(function () {
 	angular
-	.module("TripPlannerApp")
-	.controller("HomeController", HomeController);
+		.module("TripPlannerApp")
+		.controller("HomeController", HomeController);
 
-	function HomeController ($scope, $http, $location, TripService) {
-		
+	function HomeController($location, TripService) {
+
 		var model = this;
 
 		model.createTrip = createTrip;
+		model.searchTrips = searchTrips;
 
-		function createTrip() { 
+		function createTrip() {
 			console.log("Creating trip for city" + model.city);
 
-			var trip = {city: model.city};
+			var trip = { city: model.city };
 
 			TripService
-			.createTrip(trip)
-			.then(function(trip) {
-				// console.log(trip._id);
-				$location.url("/trip-create/"+ trip._id);
-			});
+				.createTrip(trip)
+				.then(function (trip) {
+					// console.log(trip._id);
+					$location.url("/trip-create/" + trip._id);
+				});
 
 			// $http
 			// .get("https://maps.googleapis.com/maps/api/geocode/json?address="+ model.city +"&key=AIzaSyBbtkDxjuDPKJJev18t5TEnAGn0t9h-YrQ")
@@ -27,12 +28,11 @@
 			// 	$scope.response = response;
 			// 	// $location.url("/trip-create");
 			// });
-}
+		}
 
-$scope.searchTrips = function() {
-			// console.log("Searching trips");
-
-			// $location.url("/trip-search");
+		function searchTrips () {
+			console.log("Searching trips");
+			$location.url("/trip-search");
 		}
 	}
 })();
