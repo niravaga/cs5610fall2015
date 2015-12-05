@@ -1,11 +1,9 @@
 module.exports = function (app, model) {
-	// app.get("/api/assignment/user", findUserByCredentials);
-	// app.get("/api/assignment/user/username=:username", findUserByUsername);
-	app.post("/api/assignment/user", createUser);
-	app.get("/api/assignment/user", findUsers);
-	app.get("/api/assignment/user/:id", findUserById);
-	app.put("/api/assignment/user/:id", updateUser);
-	app.delete("/api/assignment/user/:id", deleteUser);
+	app.post("/api/project/user", createUser);
+	app.get("/api/project/user", findUsers);
+	app.get("/api/project/user/:id", findUserById);
+	app.put("/api/project/user/:id", updateUser);
+	app.delete("/api/project/user/:id", deleteUser);
 
 	function createUser(req, res) {
 		var newUser = req.body;
@@ -58,20 +56,6 @@ module.exports = function (app, model) {
 				res.json(user);
 			});
 	}
-
-	// function findUserByUsername(req, res) {
-	// 	var username = req.params.username;
-	// 	res.json(model.findUserByUsername(username));
-	// }
-
-	// function findUserByCredentials(req, res) {
-	// 	var credentials = {
-	// 		username: req.params.username,
-	// 		password: req.params.password
-	// 	};
-
-	// 	res.json(model.findUserByCredentials(credentials));
-	// }
 
 	function updateUser(req, res) {
 		var id = req.params.id;

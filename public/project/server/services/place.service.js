@@ -6,9 +6,6 @@ module.exports = function (app, model) {
 		var dayIndex = req.params.dayIndex;
 		var place = req.body;
 		
-		console.log(tripId);
-		console.log(place);
-		
 		model
 			.addPlace(tripId, dayIndex, place)
 			.then(function (trip) {

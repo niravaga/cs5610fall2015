@@ -1,7 +1,7 @@
 (function () {
 
 	angular
-		.module("TripPlannerApp")
+		.module("FormBuilderApp")
 		.controller("RegisterController", RegisterController);
 
 	function RegisterController($rootScope, $location, UserService) {

@@ -5,7 +5,7 @@
 	<div class="col-sm-7 col-md-7">
 		<div class="form-group">
 			<div class="input-group">
-				<input ng-model="model.newPlace" type="text" class="form-control" placeholder="Add places of interest">
+				<input g-places-autocomplete ng-model="model.newPlace" type="text" class="form-control" placeholder="Add places of interest">
 				<span class="input-group-btn">
         			<button class="btn btn-default" type="button" ng-click="model.addPlace(model.newPlace)">
 					<span class="glyphicon glyphicon-plus"></span>
@@ -15,7 +15,7 @@
 		</div>
 	</div>
 	<div class="col-sm-5 col-md-5">
-		<button class="btn btn-success" tyep="button" ng-click="model.addDay()">
+		<button class="btn btn-success" type="button" ng-click="model.addDay()">
 			Add Day
 		</button>
 	</div>
@@ -38,9 +38,31 @@
 		</div>
 	</div>
 	<div class="col-sm-5 col-md-5">
-		<ui-gmap-google-map center="model.map.center" zoom="model.map.zoom">
-			<ui-gmap-markers models="model.markers" coords="'self'" icon="'icon'">
-			</ui-gmap-markers>
-		</ui-gmap-google-map>
+		<div class="row">
+			<ui-gmap-google-map center="model.map.center" zoom="model.map.zoom">
+				<ui-gmap-markers models="model.markers" coords="'self'" icon="'icon'">
+				</ui-gmap-markers>
+			</ui-gmap-google-map>
+		</div>
+		<div class="row">
+			<h4>Comments</h4>
+			<div class="input-group">
+				<select class="form-control" ng-model="model.review.rating">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button" ng-click="model.addComment()">
+						Add Comment
+					</button>
+				</span>
+			</div>
+			<textarea class="form-control" placeHolder="Comment..." ng-model="model.review.comment">
+			</textarea>
+		</div>
 	</div>
+</div>
 </div>

@@ -3,13 +3,14 @@
 		.module("TripPlannerApp")
 		.controller("tripCreateController", tripCreateController);
 
-	function tripCreateController($routeParams, uiGmapGoogleMapApi, TripService, PlaceService) {
+	function tripCreateController($rootScope, $routeParams, uiGmapGoogleMapApi, TripService, PlaceService, ReviewService) {
 
 		var model = this;
 		model.addPlace = addPlace;
 		model.addDay = addDay;
+		model.addComment = addComment;
+		model.alert = popup;
 		model.markers = [];
-
 
 		var tripId = $routeParams.tripId;
 		var dayIndex = 0;
@@ -74,11 +75,11 @@
 				});
 		}
 
-		function addPlace(placeName) {
+		function addPlace(newPlace) {
 
-			var currPlace = { name: placeName, placeId: " " };
+			var currPlace = { name: newPlace.name, placeId: newPlace.place_id };
 
-			addPlaceMarker(placeName);
+			addPlaceMarker(newPlace.formatted_address);
 
 			PlaceService
 				.addPlace(model.trip._id, dayIndex, currPlace)
@@ -98,7 +99,7 @@
 		function addMarker(place) {
 			if (!place.data.results[0])
 				return;
-				
+
 			var location = place.data.results[0].geometry.location;
 
 			var marker = {
@@ -107,47 +108,29 @@
 				id: markerId,
 				title: "Test"
 			};
-			
+
 			markerId++;
 			console.log(place);
 			model.markers.push(marker);
 		}
+
+		function addComment() {
+			console.log(model.review)
+			ReviewService
+				.addReview($rootScope.user, tripId, model.review)
+				.then(function (review) {
+					updateReviews();
+				});
+		}
 		
-		// var marker1 = {
-		// 	latitude: 47.6094497,
-		// 	longitude: -122.3418,
-		// 	title: "Pike Place Market",
-		// 	id: 1
-		// };
-
-		// var marker2 = {
-		// 	latitude: 47.6205063,
-		// 	longitude: -122.3492774,
-		// 	title: "Space Needle",
-		// 	id: 2
-		// };
-
-		// $scope.markers = [marker1, marker2];
-
-
-		// var pos2 = {lat: 47.6205063, lng: -122.3492774};
+		function updateReviews(){
+			console.log(model.review);
+			model.review = null;
+		}
 		
-		// var map = new google.maps.Map(document.getElementById('map'), {
-		// 	center: pos,
-		// 	zoom: 8
-		// });
-
-		// var marker = new google.maps.Marker({
-		// 	position: pos,
-		// 	map: map,
-		// 	title: "Pike Place Market"
-		// });
-
-		// var marker2 = new google.maps.Marker({
-		// 	position: pos2,
-		// 	map: map,
-		// 	title: "Space Needle"
-		// });
+		function popup(message){
+			console.log(message);
+		}
 	}
 
 })();
