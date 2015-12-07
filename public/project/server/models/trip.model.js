@@ -9,7 +9,11 @@ module.exports = function (mongoose, db) {
 		findTripById: findTripById,
 		addDayToTrip: addDayToTrip,
 		addPlace: addPlace,
-		findAllTripsForCity: findAllTripsForCity
+		findAllTripsForCity: findAllTripsForCity,
+		deletePlace: deletePlace,
+		deleteDay: deleteDay,
+		addCollaborator: addCollaborator,
+		deleteCollaborator: deleteCollaborator
 	};
 
 	return api;
@@ -18,6 +22,7 @@ module.exports = function (mongoose, db) {
 		var deferred = q.defer();
 
 		newTrip["days"] = [];
+		newTrip["collaborators"] = [];
 		addDay(newTrip);
 
 		TripModel.create(newTrip, function (err, trip) {
@@ -96,7 +101,78 @@ module.exports = function (mongoose, db) {
 			else
 				deferred.resolve(trips);
 		});
-		
+
 		return deferred.promise;
 	}
+
+	function deletePlace(tripId, dayIndex, placeIndex) {
+		var deferred = q.defer();
+
+		TripModel.findById(tripId, function (err, trip) {
+			trip.days[dayIndex].places.splice(placeIndex, 1);
+
+			trip.save(function (err, trip) {
+				if (err)
+					deferred.reject(err);
+				else
+					deferred.resolve(trip);
+			});
+		})
+
+		return deferred.promise;
+	}
+
+	function deleteDay(tripId, dayIndex) {
+		var deferred = q.defer();
+
+		TripModel.findById(tripId, function (err, trip) {
+			trip.days.splice(dayIndex, 1);
+
+			trip.save(function (err, trip) {
+				if (err)
+					deferred.reject(err);
+				else
+					deferred.resolve(trip);
+			});
+		})
+
+		return deferred.promise;
+	}
+
+	function addCollaborator(tripId, username) {
+		var deferred = q.defer();
+
+		TripModel.findById(tripId, function (err, trip) {
+
+			if (trip.collaborators.indexOf(username) == -1)
+				trip.collaborators.push(username);
+
+			trip.save(function (err, trip) {
+				if (err)
+					deferred.reject(err);
+				else
+					deferred.resolve(trip);
+			});
+		})
+
+		return deferred.promise;
+	}
+
+	function deleteCollaborator(tripId, index) {
+		var deferred = q.defer();
+
+		TripModel.findById(tripId, function (err, trip) {
+			trip.collaborators.splice(index, 1);
+
+			trip.save(function (err, trip) {
+				if (err)
+					deferred.reject(err);
+				else
+					deferred.resolve(trip);
+			});
+		})
+
+		return deferred.promise;
+	}
+
 }

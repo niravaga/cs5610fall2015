@@ -15,7 +15,7 @@
 			var deferred = $q.defer();
 
 			$http
-				.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + name + "&key=AIzaSyBbtkDxjuDPKJJev18t5TEnAGn0t9h-YrQ")
+				.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + name)
 				.then(function (place) {
 					deferred.resolve(place);
 				});
@@ -30,7 +30,7 @@
 				.post("/api/project/trip/" + tripId + "/day/" + dayIndex + "/place", place)
 				.then(function (trip) {
 					console.log(trip);
-					deferred.resolve(trip);
+					deferred.resolve(trip.data);
 				});
 
 			return deferred.promise;

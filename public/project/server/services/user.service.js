@@ -1,9 +1,32 @@
-module.exports = function (app, model) {
+module.exports = function (app, model, passport) {
+	app.get("/api/project/loggedin", loggedIn);
+	app.post("/api/project/login", passport.authenticate('local'), login);
+	app.post("/api/project/logout", logout);
 	app.post("/api/project/user", createUser);
 	app.get("/api/project/user", findUsers);
 	app.get("/api/project/user/:id", findUserById);
 	app.put("/api/project/user/:id", updateUser);
 	app.delete("/api/project/user/:id", deleteUser);
+
+	function login(req, res) {
+		var user = req.body;
+
+		model
+			.findUserByCredentials(user)
+			.then(function (foundUser) {
+				res.json(foundUser);
+			});
+	}
+
+	function logout(req, res) {
+		req.logout();
+		res.send(200);
+	}
+
+	function loggedIn(req, res) {
+		res.send(req.isAuthenticated() ? req.user : '0');
+	}
+
 
 	function createUser(req, res) {
 		var newUser = req.body;
@@ -75,4 +98,6 @@ module.exports = function (app, model) {
 				res.json(users);
 			});
 	}
+
+
 };

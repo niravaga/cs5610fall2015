@@ -1,9 +1,28 @@
 var q = require("q");
 
-module.exports = function (mongoose, db) {
+module.exports = function (mongoose, db, passport, LocalStrategy) {
 
 	var UserSchema = require("./user.schema.js")(mongoose);
 	var UserModel = mongoose.model("TravellerModel", UserSchema);
+	
+	passport.use(new LocalStrategy(
+		function (username, password, done) {
+			UserModel.findOne({ username: username, password: password }, function (err, user) {
+				if (err) { return done(err); }
+				if (!user) { return done(null, false); }
+				return done(null, user);
+			})
+		}));
+
+	passport.serializeUser(function (user, done) {
+		done(null, user);
+	});
+
+	passport.deserializeUser(function (user, done) {
+		UserModel.findById(user._id, function (err, user) {
+			done(err, user);
+		});
+	});
 
 	var api = {
 		createUser: createUser,

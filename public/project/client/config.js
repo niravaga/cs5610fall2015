@@ -19,7 +19,10 @@
 			})
 			.when("/profile", {
 				templateUrl: "profile/profile.view.html",
-				controller: "profileController as model"
+				controller: "profileController as model",
+				resolve: {
+					loggedIn: checkLoggedin
+				}
 			})
 			.when("/trip-create/:tripId", {
 				templateUrl: "trip/trip-create.view.html",
@@ -29,8 +32,31 @@
 				templateUrl: "trip/trip-search.view.html",
 				controller: "tripSearchController as model"
 			})
+			.when("/trip/:tripId/collaborate", {
+				templateUrl: "collaborate/collaborate.view.html",
+				controller: "CollabController as model"
+			})
 			.otherwise({
 				redirectTo: "/home"
 			});
 	}
 })();
+
+var checkLoggedin = function ($q, $timeout, $http, $location, $rootScope) {
+	var deferred = $q.defer();
+
+	$http.get('/api/project/loggedin')
+		.success(function (user) {
+			if (user !== '0') {
+				$rootScope.currentUser = user;
+				deferred.resolve();
+			}
+			else {
+				$rootScope.errorMessage = 'You need to log in.';
+				deferred.reject();
+				$location.url('/login');
+			}
+		});
+
+	return deferred.promise;
+};

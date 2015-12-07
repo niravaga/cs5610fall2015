@@ -13,8 +13,12 @@
 			findTripsByUsername: findTripsByUsername,
 			findAllTripsForCity: findAllTripsForCity,
 			addDayToTrip: addDayToTrip,
+			deleteDay: deleteDay,
+			deletePlace: deletePlace,
 			updateTrip: updateTrip,
-			deleteTrip: deleteTrip
+			deleteTrip: deleteTrip,
+			addCollaborator: addCollaborator,
+			deleteCollaborator: deleteCollaborator
 		};
 
 		return api;
@@ -24,8 +28,8 @@
 
 			$http
 				.post("/api/project/trip", newTrip)
-				.success(function (trip) {
-					deferred.resolve(trip);
+				.then(function (trip) {
+					deferred.resolve(trip.data);
 				});
 
 			return deferred.promise;
@@ -36,8 +40,8 @@
 
 			$http
 				.get("/api/project/trip")
-				.success(function (trips) {
-					deferred.resolve(trips);
+				.then(function (trips) {
+					deferred.resolve(trips.data);
 				});
 
 			return deferred.promise;
@@ -56,8 +60,8 @@
 
 			$http
 				.get("/api/project/trip/" + tripId)
-				.success(function (trip) {
-					deferred.resolve(trip);
+				.then(function (trip) {
+					deferred.resolve(trip.data);
 				});
 
 			return deferred.promise;
@@ -73,8 +77,8 @@
 			console.log(tripId);
 			$http
 				.post("/api/project/trip/" + tripId + "/day/")
-				.success(function (trip) {
-					deferred.resolve(trip);
+				.then(function (trip) {
+					deferred.resolve(trip.data);
 				});
 
 			return deferred.promise;
@@ -89,12 +93,59 @@
 
 			$http
 				.get("/api/project/trip/city/" + city)
-				.success(function (trips) {
-					deferred.resolve(trips);
+				.then(function (trips) {
+					deferred.resolve(trips.data);
 				});
 
 			return deferred.promise;
 		}
 
+		function deletePlace(tripId, dayIndex, placeIndex) {
+			var deferred = $q.defer();
+
+			$http
+				.delete("/api/project/trip/" + tripId + "/day/" + dayIndex + "/place/" + placeIndex)
+				.then(function (trip) {
+					deferred.resolve(trip.data);
+				});
+
+			return deferred.promise;
+		}
+
+		function deleteDay(tripId, dayIndex) {
+			var deferred = $q.defer();
+
+			$http
+				.delete("/api/project/trip/" + tripId + "/day/" + dayIndex)
+				.then(function (trip) {
+					deferred.resolve(trip.data);
+				});
+
+			return deferred.promise;
+		}
+
+		function addCollaborator(tripId, user) {
+			var deferred = $q.defer();
+
+			$http
+				.post("/api/project/trip/" + tripId + "/collaborator/", user)
+				.then(function (trip) {
+					deferred.resolve(trip.data);
+				});
+
+			return deferred.promise;
+		}
+
+		function deleteCollaborator(tripId, index) {
+			var deferred = $q.defer();
+
+			$http
+				.delete("/api/project/trip/" + tripId + "/collaborator/" + index)
+				.then(function (trip) {
+					deferred.resolve(trip.data);
+				});
+
+			return deferred.promise;
+		}
 	}
 })();

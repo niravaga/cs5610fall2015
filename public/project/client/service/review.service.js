@@ -16,7 +16,7 @@
 			$http
 				.post("/api/project/trip/" + tripId + "/author/" + userId, comment)
 				.then(function (review) {
-					deferred.resolve(review);
+					deferred.resolve(review.data);
 				});
 
 			return deferred.promise;
@@ -28,7 +28,7 @@
 			$http
 				.get("/api/project/trip/" + tripId + "/tripId")
 				.then(function (reviews) {
-					deferred.resolve(reviews);
+					deferred.resolve(reviews.data);
 				});
 
 			return deferred.promise;

@@ -1,5 +1,6 @@
 module.exports = function (mongoose) {
 	var TripSchema = mongoose.Schema({
+		"userId": String,
 		"city": String,
 		"days": [
 		{
@@ -9,7 +10,9 @@ module.exports = function (mongoose) {
 			}
 			]
 		}
-		]
+		],
+		
+		"collaborators": [String]
 	}, {collection: "cs5610.project.trip"});
 
 	return TripSchema;

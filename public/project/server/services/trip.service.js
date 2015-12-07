@@ -3,6 +3,10 @@ module.exports = function (app, model) {
 	app.get("/api/project/trip/:tripId", findTripById);
 	app.post("/api/project/trip/:tripId/day", addDayToTrip);
 	app.get("/api/project/trip/city/:city", findAllTripsForCity);
+	app.delete("/api/project/trip/:tripId/day/:dayIndex/place/:placeIndex", deletePlace);
+	app.delete("/api/project/trip/:tripId/day/:dayIndex", deleteDay);
+	app.post("/api/project/trip/:tripId/collaborator/", addCollaborator);
+	app.delete("/api/project/trip/:tripId/collaborator/:index", deleteCollaborator);
 
 	function createTrip(req, res) {
 		var newTrip = req.body;
@@ -43,6 +47,51 @@ module.exports = function (app, model) {
 			.findAllTripsForCity(city)
 			.then(function (trips) {
 				res.json(trips);
+			});
+	}
+
+	function deletePlace(req, res) {
+		var tripId = req.params.tripId;
+		var dayIndex = req.params.dayIndex;
+		var placeIndex = req.params.placeIndex;
+
+		model
+			.deletePlace(tripId, dayIndex, placeIndex)
+			.then(function (trip) {
+				res.json(trip);
+			});
+	}
+
+	function deleteDay(req, res) {
+		var tripId = req.params.tripId;
+		var dayIndex = req.params.dayIndex;
+
+		model
+			.deleteDay(tripId, dayIndex)
+			.then(function (trip) {
+				res.json(trip);
+			});
+	}
+
+	function addCollaborator(req, res) {
+		var username = req.body.username;
+		var tripId = req.params.tripId;
+
+		model
+			.addCollaborator(tripId, username)
+			.then(function (trip) {
+				res.json(trip);
+			});
+	}
+
+	function deleteCollaborator(req, res) {
+		var index = req.params.index;
+		var tripId = req.params.tripId;
+
+		model
+			.deleteCollaborator(tripId, index)
+			.then(function (trip) {
+				res.json(trip);
 			});
 	}
 }
