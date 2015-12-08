@@ -1,3 +1,5 @@
+"use strict";
+
 (function () {
 	angular
 		.module("TripPlannerApp")
@@ -10,7 +12,7 @@
 			createTrip: createTrip,
 			findAllTrips: findAllTrips,
 			findTripById: findTripById,
-			findTripsByUsername: findTripsByUsername,
+			findTripsForUser: findTripsForUser,
 			findAllTripsForCity: findAllTripsForCity,
 			addDayToTrip: addDayToTrip,
 			deleteDay: deleteDay,
@@ -47,12 +49,16 @@
 			return deferred.promise;
 		}
 
-		function findTripsByUsername(curUsername) {
-			var userTrips = [];
-			for (var i in trips) {
-				if (trips[i].username == curUsername)
-					userTrips.push(trips[i]);
-			}
+		function findTripsForUser(userId) {
+			var deferred = $q.defer();
+
+			$http
+				.get("/api/project/trip/user/" + userId)
+				.then(function (trips) {
+					deferred.resolve(trips.data);
+				});
+
+			return deferred.promise;
 		}
 
 		function findTripById(tripId) {
@@ -84,8 +90,16 @@
 			return deferred.promise;
 		}
 
-		function deleteTrip() {
+		function deleteTrip(tripId) {
+			var deferred = $q.defer();
 
+			$http
+				.delete("/api/project/trip/" + tripId)
+				.then(function (trip) {
+					deferred.resolve(trip.data);
+				});
+
+			return deferred.promise;
 		}
 
 		function findAllTripsForCity(city) {

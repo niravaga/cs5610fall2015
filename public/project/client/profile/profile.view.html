@@ -1,4 +1,4 @@
-<h1>User Name</h1>
+<h1>{{model.currentUser.username}}</h1>
 
 <h2>My Trips</h2>
 <table class="table table-striped">
@@ -10,32 +10,11 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>Seattle</td>
-			<td>5</td>
+		<tr ng-repeat="trip in model.trips">
+			<td><a href="#/trip-create/{{trip._id}}">{{trip.city}}</a></td>
+			<td>{{trip.days.length}}</td>
 			<td class="no-wrap">
-				<button ng-click= "" class="btn btn-default">
-					<span class="glyphicon glyphicon-edit"></span>
-				</button>
-				<button ng-click="deleteTrip()" type="button" class="btn btn-primary">
-					<span class="glyphicon glyphicon-share"></span>
-				</button>
-				<button ng-click="deleteTrip()" type="button" class="btn btn-danger">
-					<span class="glyphicon glyphicon-trash"></span>
-				</button>
-			</td>
-		</tr>
-		<tr>
-			<td>Boston</td>
-			<td>8</td>
-			<td class="no-wrap">
-				<button ng-click= "" class="btn btn-default">
-					<span class="glyphicon glyphicon-edit"></span>
-				</button>
-				<button ng-click="deleteTrip()" type="button" class="btn btn-primary">
-					<span class="glyphicon glyphicon-share"></span>
-				</button>
-				<button ng-click="deleteTrip()" type="button" class="btn btn-danger">
+				<button ng-click="model.deleteTrip(trip._id)" type="button" class="btn btn-danger">
 					<span class="glyphicon glyphicon-trash"></span>
 				</button>
 			</td>

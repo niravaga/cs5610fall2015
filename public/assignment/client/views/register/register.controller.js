@@ -22,7 +22,7 @@
 				.findUserByUsernameAndPassword(model.newUser.username, model.newUser.password)
 				.then(function (user) {
 					// console.log(user);
-					$rootScope.loggedInUser = user;
+					$rootScope.currentUser = user;
 					$location.url("/profile");
 				});
 

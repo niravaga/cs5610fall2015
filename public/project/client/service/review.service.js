@@ -1,3 +1,5 @@
+"use strict";
+
 (function () {
 	angular
 		.module("TripPlannerApp")
@@ -5,7 +7,8 @@
 
 	function ReviewService($http, $q) {
 		var api = {
-			addReview: addReview
+			addReview: addReview,
+			findTripReviews: findTripReviews
 		}
 
 		return api;
@@ -22,11 +25,11 @@
 			return deferred.promise;
 		}
 
-		function getTripReviews(tripId) {
+		function findTripReviews(tripId) {
 			var deferred = $q.defer();
 
 			$http
-				.get("/api/project/trip/" + tripId + "/tripId")
+				.get("/api/project/trip/" + tripId + "/review")
 				.then(function (reviews) {
 					deferred.resolve(reviews.data);
 				});

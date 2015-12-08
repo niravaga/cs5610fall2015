@@ -4,7 +4,7 @@ module.exports = function (mongoose, db, passport, LocalStrategy) {
 
 	var UserSchema = require("./user.schema.js")(mongoose);
 	var UserModel = mongoose.model("TravellerModel", UserSchema);
-	
+
 	passport.use(new LocalStrategy(
 		function (username, password, done) {
 			UserModel.findOne({ username: username, password: password }, function (err, user) {
@@ -71,7 +71,8 @@ module.exports = function (mongoose, db, passport, LocalStrategy) {
 
 	function findUserById(id) {
 		var deferred = q.defer();
-
+		
+		console.log(id);
 		UserModel.findById(id, function (err, user) {
 			if (err) {
 				deferred.reject(err);

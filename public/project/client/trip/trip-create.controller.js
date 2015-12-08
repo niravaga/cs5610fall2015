@@ -1,9 +1,11 @@
+"use strict";
+
 (function () {
 	angular
 		.module("TripPlannerApp")
 		.controller("tripCreateController", tripCreateController);
 
-	function tripCreateController($rootScope, $routeParams, uiGmapGoogleMapApi, TripService, PlaceService, ReviewService) {
+	function tripCreateController($rootScope, $routeParams, $location, uiGmapGoogleMapApi, TripService, PlaceService, ReviewService) {
 
 		var model = this;
 		model.addPlace = addPlace;
@@ -13,9 +15,13 @@
 		model.setDayIndex = setDayIndex;
 		model.deleteDay = deleteDay;
 		model.deletePlace = deletePlace;
+		model.createTrip = createTrip;
 		model.markers = [];
+		model.reviews = [];
 
 		var tripId = $routeParams.tripId;
+		model.isOwner = false;
+		model.isCollaborator = false;
 		var dayIndex = 0;
 		var markerId = 1;
 		function init() {
@@ -25,6 +31,8 @@
 					console.log(trip);
 					model.trip = trip;
 					initMap(trip);
+					initReviews();
+					authenticateUser(trip);
 				});
 
 			function initMap(trip) {
@@ -48,9 +56,29 @@
 						addTripMarkers(trip);
 					});
 			}
+
+			function authenticateUser(trip) {
+				if ($rootScope.currentUser) {
+					if ($rootScope.currentUser._id == trip.userId)
+						model.isOwner = true;
+
+					if (trip.collaborators.indexOf($rootScope.currentUser.username) != -1)
+						model.isCollaborator = true;
+				}
+			}
+
+
 		}
 
 		init();
+		function initReviews() {
+			ReviewService
+				.findTripReviews(tripId)
+				.then(function (reviews) {
+					console.log(reviews);
+					model.reviews = reviews;
+				});
+		}
 
 		function addTripMarkers(trip) {
 			model.markers = [];
@@ -98,11 +126,11 @@
 			PlaceService
 				.findPlace(placeName)
 				.then(function (place) {
-					addMarker(place);
+					addMarker(place, placeName);
 				});
 		}
 
-		function addMarker(place) {
+		function addMarker(place, name) {
 			if (!place.data.results[0])
 				return;
 
@@ -112,7 +140,7 @@
 				latitude: location.lat,
 				longitude: location.lng,
 				id: markerId,
-				title: "Test"
+				title: name
 			};
 
 			markerId++;
@@ -125,13 +153,8 @@
 			ReviewService
 				.addReview($rootScope.currentUser._id, tripId, model.review)
 				.then(function (review) {
-					updateReviews();
+					initReviews();
 				});
-		}
-
-		function updateReviews() {
-			console.log(model.review);
-			model.review = null;
 		}
 
 		function popup(message) {
@@ -160,6 +183,34 @@
 					dayIndex = trip.days.length - 1;
 				});
 		}
+
+		function createTrip() {
+
+			if ($rootScope.currentUser) {
+				console.log("Creating trip for city " + model.trip.city);
+
+				var newTrip = {
+					city: model.trip.city,
+					userId: $rootScope.currentUser._id,
+					days: model.trip.days
+				};
+
+				TripService
+					.createTrip(newTrip)
+					.then(function (trip) {
+						// console.log(trip._id);
+						$location.url("/trip-create/" + trip._id);
+					});
+			}
+			else {
+				$rootScope.errorMessage = "Please login to create trips";
+				$location.url("/login");
+			}
+		}
+
+
 	}
+
+
 
 })();

@@ -6,7 +6,8 @@ module.exports = function (mongoose, db) {
 	var ReviewModel = mongoose.model("ReviewModel", ReviewSchema);
 
 	var api = {
-		createCommentForUser: createCommentForUser
+		createCommentForUser: createCommentForUser,
+		findTripReviews: findTripReviews
 	};
 
 	return api;
@@ -14,7 +15,7 @@ module.exports = function (mongoose, db) {
 	function createCommentForUser(userId, tripId, comment) {
 		comment.userId = userId;
 		comment.tripId = tripId;
-		
+
 		console.log(comment);
 		return createComment(comment);
 	}
@@ -28,7 +29,20 @@ module.exports = function (mongoose, db) {
 			else
 				deferred.resolve(doc);
 		});
-		
+
+		return deferred.promise;
+	}
+
+	function findTripReviews(tripId) {
+		var deferred = q.defer();
+
+		ReviewModel.find({ tripId: tripId }, function (err, reviews) {
+			if (err)
+				deferred.reject(err);
+			else
+				deferred.resolve(reviews);
+		});
+
 		return deferred.promise;
 	}
 }

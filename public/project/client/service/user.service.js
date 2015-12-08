@@ -12,6 +12,7 @@
 			findAllUsers: findAllUsers,
 			findUserByUsernameAndPassword: findUserByUsernameAndPassword,
 			findUserByUsername: findUserByUsername,
+			findUserById: findUserById,
 			deleteUserById: deleteUserById,
 			updateUser: updateUser,
 			login: login,
@@ -50,6 +51,18 @@
 			$http
 				.get("/api/project/user?username=" + username + "&password=" + password)
 				.then(function (user) {
+					deferred.resolve(user);
+				});
+
+			return deferred.promise;
+		}
+		
+		function findUserById(userId) {
+			var deferred = $q.defer();
+
+			$http
+				.get("/api/project/user/" + userId)
+				.success(function (user) {
 					deferred.resolve(user);
 				});
 
@@ -104,16 +117,16 @@
 
 			return deferred.promise;
 		}
-		
-		function findUserByUsername(username){
+
+		function findUserByUsername(username) {
 			var deferred = $q.defer();
-			
+
 			$http
 				.get("/api/project/user?username=" + username)
 				.success(function (user) {
 					deferred.resolve(user);
 				});
-			
+
 			return deferred.promise;
 		}
 	}

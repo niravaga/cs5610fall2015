@@ -3,8 +3,10 @@ module.exports = function (app, model) {
 	app.get("/api/project/trip/:tripId", findTripById);
 	app.post("/api/project/trip/:tripId/day", addDayToTrip);
 	app.get("/api/project/trip/city/:city", findAllTripsForCity);
+	app.get("/api/project/trip/user/:userId", findTripsForUser);
 	app.delete("/api/project/trip/:tripId/day/:dayIndex/place/:placeIndex", deletePlace);
 	app.delete("/api/project/trip/:tripId/day/:dayIndex", deleteDay);
+	app.delete("/api/project/trip/:tripId", deleteTrip);
 	app.post("/api/project/trip/:tripId/collaborator/", addCollaborator);
 	app.delete("/api/project/trip/:tripId/collaborator/:index", deleteCollaborator);
 
@@ -50,6 +52,16 @@ module.exports = function (app, model) {
 			});
 	}
 
+	function findTripsForUser(req, res) {
+		var userId = req.params.userId;
+
+		model
+			.findTripsForUser(userId)
+			.then(function (trips) {
+				res.json(trips);
+			});
+	}
+
 	function deletePlace(req, res) {
 		var tripId = req.params.tripId;
 		var dayIndex = req.params.dayIndex;
@@ -72,6 +84,17 @@ module.exports = function (app, model) {
 				res.json(trip);
 			});
 	}
+
+	function deleteTrip(req, res) {
+		var tripId = req.params.tripId;
+
+		model
+			.deleteTrip(tripId)
+			.then(function (trip) {
+				res.json(trip);
+			});
+	}
+
 
 	function addCollaborator(req, res) {
 		var username = req.body.username;

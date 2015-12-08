@@ -1,3 +1,5 @@
+"use strict";
+
 (function () {
 
 	angular
@@ -19,14 +21,15 @@
 
 		function userCreated(users) {
 			UserService
-				.findUserByUsernameAndPassword(model.newUser.username, model.newUser.password)
-				.then(function (user) {
-					// console.log(user);
-					$rootScope.loggedInUser = user;
-					$location.url("/profile");
+				.login(model.newUser)
+				.then(function (response) {
+					if (response != null) {
+						$rootScope.currentUser = response;
+						$location.url("/profile");
+					} else {
+						model.message = "Invalid username or pasword";
+					}
 				});
-
-
 		}
 	}
 })();

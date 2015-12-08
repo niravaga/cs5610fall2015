@@ -10,8 +10,10 @@ module.exports = function (mongoose, db) {
 		addDayToTrip: addDayToTrip,
 		addPlace: addPlace,
 		findAllTripsForCity: findAllTripsForCity,
+		findTripsForUser: findTripsForUser,
 		deletePlace: deletePlace,
 		deleteDay: deleteDay,
+		deleteTrip: deleteTrip,
 		addCollaborator: addCollaborator,
 		deleteCollaborator: deleteCollaborator
 	};
@@ -21,9 +23,11 @@ module.exports = function (mongoose, db) {
 	function createTrip(newTrip) {
 		var deferred = q.defer();
 
+
 		newTrip["days"] = [];
-		newTrip["collaborators"] = [];
 		addDay(newTrip);
+
+		newTrip["collaborators"] = [];
 
 		TripModel.create(newTrip, function (err, trip) {
 			if (err)
@@ -105,6 +109,21 @@ module.exports = function (mongoose, db) {
 		return deferred.promise;
 	}
 
+	function findTripsForUser(userId) {
+		var deferred = q.defer();
+
+		console.log(userId);
+
+		TripModel.find({ userId: userId }, function (err, trips) {
+			if (err)
+				deferred.reject(err);
+			else
+				deferred.resolve(trips);
+		});
+
+		return deferred.promise;
+	}
+
 	function deletePlace(tripId, dayIndex, placeIndex) {
 		var deferred = q.defer();
 
@@ -135,6 +154,21 @@ module.exports = function (mongoose, db) {
 					deferred.resolve(trip);
 			});
 		})
+
+		return deferred.promise;
+	}
+
+	function deleteTrip(tripId) {
+		var deferred = q.defer();
+
+		TripModel.remove({ _id: tripId }, function (err, result) {
+			TripModel.find(function (err, trips) {
+				if (err)
+					deferred.reject(err);
+				else
+					deferred.resolve(trips);
+			});
+		});
 
 		return deferred.promise;
 	}

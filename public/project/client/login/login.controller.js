@@ -1,3 +1,5 @@
+"use strict";
+
 (function () {
       angular
             .module("TripPlannerApp")
@@ -7,7 +9,7 @@
             var model = this;
 
             model.login = login;
-            
+
             model.message = $rootScope.errorMessage;
 
             function login(user) {

@@ -6,21 +6,17 @@
 			<th>City</th>
 			<th>No. of Days</th>
 			<th>Created By</th>
-			<th>Action</th>
+			<th>Average Rating</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr ng-repeat="trip in model.trips">
 			<td>
 				<a href="#/trip-create/{{trip._id}}">{{trip.city}}</a>
-				</td>
-			<td>{{trip.days.length}}</td>
-			<td>Username</td>
-			<td class="no-wrap">
-				<button ng-click= "" class="btn btn-default">
-					Use this trip
-				</button>
 			</td>
+			<td>{{trip.days.length}}</td>
+			<td>{{trip.user.username}}</td>
+			<td>{{trip.averageRating}}</td>
 		</tr>
 	</tbody>
 </table>

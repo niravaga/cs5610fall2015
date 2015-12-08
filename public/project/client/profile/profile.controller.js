@@ -1,14 +1,31 @@
+"use strict";
+
 (function () {
 	angular
-	.module("TripPlannerApp")
-	.controller("profileController", profileController);
+		.module("TripPlannerApp")
+		.controller("profileController", profileController);
 
-	function profileController($scope) {
+	function profileController($rootScope, UserService, TripService) {
 
-		$scope.deleteTrip = deleteTrip;
+		var model = this;
+		model.currentUser = $rootScope.currentUser;
 
-		function deleteTrip(){
-			
+		model.deleteTrip = deleteTrip;
+
+		function init() {
+			TripService
+				.findTripsForUser(model.currentUser._id)
+				.then(function (trips) {
+					model.trips = trips;
+				});
+		}
+
+		init();
+
+		function deleteTrip(tripId) {
+			TripService
+				.deleteTrip(tripId)
+				.then(init);
 		}
 	}
-}) ();
+})();

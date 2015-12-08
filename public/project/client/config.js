@@ -52,7 +52,7 @@ var checkLoggedin = function ($q, $timeout, $http, $location, $rootScope) {
 				deferred.resolve();
 			}
 			else {
-				$rootScope.errorMessage = 'You need to log in.';
+				$rootScope.errorMessage = 'Please login to access this feature.';
 				deferred.reject();
 				$location.url('/login');
 			}

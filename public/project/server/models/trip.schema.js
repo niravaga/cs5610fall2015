@@ -3,17 +3,19 @@ module.exports = function (mongoose) {
 		"userId": String,
 		"city": String,
 		"days": [
-		{
-			"places": [{
-				"name": String,
-				"placeId": String
+			{
+				"places": [{
+					"name": String,
+					"latitude": String,
+					"longitude": String,
+					"placeId": String
+				}
+				]
 			}
-			]
-		}
 		],
-		
+
 		"collaborators": [String]
-	}, {collection: "cs5610.project.trip"});
+	}, { collection: "cs5610.project.trip" });
 
 	return TripSchema;
 };
