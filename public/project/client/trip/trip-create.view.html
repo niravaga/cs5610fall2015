@@ -29,12 +29,15 @@
 						Collaborate
 					</button>
 				</a>
+				<button class="btn btn-primary" type="button" ng-click="model.updateTrip()">
+					Update Trip
+				</button>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-sm-7 col-md-7">
-				<ul class="list-unstyled">
+				<ul ui-sortable ng-model="model.trip.days" class="list-unstyled">
 					<li ng-repeat="(dayIndex, day) in model.trip.days" class="panel panel-default">
 						<div class="panel-heading">
 							<div class="pull-right" ng-if="model.isOwner || model.isCollaborator">
@@ -48,8 +51,7 @@
 							<h3 class="panel-title">Day {{$index+1}}</h3>
 						</div>
 						<div class="panel-body">
-							<ul class="list-unstyled">
-
+							<ul ui-sortable=model.sortableOptions ng-model="model.trip.days[$index].places" class="list-unstyled apps-container">
 								<li class="panel panel-default" ng-repeat="place in day.places">
 									<div class="panel-body">
 										{{place.name}}

@@ -6,6 +6,7 @@ module.exports = function (mongoose, db) {
 
 	var api = {
 		createTrip: createTrip,
+		updateTrip: updateTrip,
 		findTripById: findTripById,
 		addDayToTrip: addDayToTrip,
 		addPlace: addPlace,
@@ -34,6 +35,21 @@ module.exports = function (mongoose, db) {
 				deferred.reject(err);
 			else
 				deferred.resolve(trip);
+		});
+
+		return deferred.promise;
+	}
+
+	function updateTrip(tripId, newTrip) {
+		var deferred = q.defer();
+
+		delete newTrip["_id"];
+
+		TripModel.update({ _id: tripId }, { $set: newTrip }, function (err, response) {
+			if (err)
+				deferred.reject(err);
+			else
+				deferred.resolve(response);
 		});
 
 		return deferred.promise;

@@ -16,8 +16,13 @@
 		model.deleteDay = deleteDay;
 		model.deletePlace = deletePlace;
 		model.createTrip = createTrip;
+		model.updateTrip = updateTrip;
 		model.markers = [];
 		model.reviews = [];
+
+		model.sortableOptions = {
+			connectWith: ".apps-container"
+		}
 
 		var tripId = $routeParams.tripId;
 		model.isOwner = false;
@@ -230,6 +235,14 @@
 				$rootScope.errorMessage = "Please login to create trips";
 				$location.url("/login");
 			}
+		}
+
+		function updateTrip() {
+			TripService
+				.updateTrip(tripId, model.trip)
+				.then(function (response) {
+					refreshTrip();
+				});
 		}
 
 

@@ -9,6 +9,7 @@ module.exports = function (app, model) {
 	app.delete("/api/project/trip/:tripId", deleteTrip);
 	app.post("/api/project/trip/:tripId/collaborator/", addCollaborator);
 	app.delete("/api/project/trip/:tripId/collaborator/:index", deleteCollaborator);
+	app.put("/api/project/trip/:tripId", updateTrip);
 
 	function createTrip(req, res) {
 		var newTrip = req.body;
@@ -115,6 +116,17 @@ module.exports = function (app, model) {
 			.deleteCollaborator(tripId, index)
 			.then(function (trip) {
 				res.json(trip);
+			});
+	}
+
+	function updateTrip(req, res) {
+		var tripId = req.params.tripId;
+		var newTrip = req.body;
+
+		model
+			.updateTrip(tripId, newTrip)
+			.then(function (response) {
+				res.json(response);
 			});
 	}
 }

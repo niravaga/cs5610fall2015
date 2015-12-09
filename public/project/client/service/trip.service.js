@@ -72,7 +72,16 @@
 			return deferred.promise;
 		}
 
-		function updateTrip(newTrip) {
+		function updateTrip(tripId, newTrip) {
+			var deferred = $q.defer()
+
+			$http
+				.put("/api/project/trip/" + tripId, newTrip)
+				.then(function (response) {
+					deferred.resolve(response);
+				});
+
+			return deferred.promise;
 
 		}
 
