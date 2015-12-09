@@ -1,15 +1,24 @@
-<h1>Create or Search trips</h1>
-<form class="form-horizontal">
+<div id="home">
+	<div id="search-input">
+		<div class="col-xs-2 col-sm-4"></div>
+		<div class="col-xs-8 col-sm-4">
+			<div class="helper-container">
+				<h1 class="helper-text">Create or Search trips</h1>
+			</div>
+			<form class="form-horizontal">
 
-	<form class="form-horizontal">
-		<div class="input-group">
-			<input ng-model="model.city" type="text" class="form-control" placeholder="City">
-			<span class="input-group-btn">
+				<!--<form class="form-horizontal">-->
+				<div class="input-group">
+					<input ng-model="model.city" type="text" class="form-control" placeholder="City">
+					<span class="input-group-btn">
 		<button type="submit" ng-click="model.searchTrips(model.city)" class="btn btn-primary">Search</button>
 		</span>
+				</div>
+				<button ng-click="model.createTrip()" class="btn btn-primary" data-toggle="tooltip" data-placement="left" uib-tooltip="Please login to create a trip"
+				tooltip-placement="bottom">Create
+					<span ng-if="model.city">a new trip to {{model.city}}</span></button>
+				<!--</form>-->
+			</form>
 		</div>
-		<button ng-click="model.createTrip()" class="btn btn-primary" data-toggle="tooltip" data-placement="left" uib-tooltip="Please login to create a trip"
-		tooltip-placement="bottom">Create 
-		<span ng-if="model.city">a new trip to {{model.city}}</button>
-	</form>
-</form>
+	</div>
+</div>

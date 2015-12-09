@@ -120,6 +120,30 @@
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
+#home {
+  background-image: url("bg3.jpg");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: cover;
+  width: auto;
+  height: 920px;
+  background-attachment: fixed;
+}
+
+#search-input {
+  vertical-align: center;
+  padding-top: 200px;
+}
+
+.helper-container {
+  text-align: center;
+}
+
+.helper-text {
+  color: #FFF;
+}
+
+
 /*
  * AutoComplete
  */

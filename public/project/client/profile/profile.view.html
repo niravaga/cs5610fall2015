@@ -1,23 +1,27 @@
-<h1>{{model.currentUser.username}}</h1>
+<div class="container">
+	<div class="col-sm-10 col-md-12 main">
+		<h1>{{model.currentUser.username}}</h1>
 
-<h2>My Trips</h2>
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>City</th>
-			<th>No. of Places</th>
-			<th>Action</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="trip in model.trips">
-			<td><a href="#/trip-create/{{trip._id}}">{{trip.city}}</a></td>
-			<td>{{trip.days.length}}</td>
-			<td class="no-wrap">
-				<button ng-click="model.deleteTrip(trip._id)" type="button" class="btn btn-danger">
-					<span class="glyphicon glyphicon-trash"></span>
-				</button>
-			</td>
-		</tr>
-	</tbody>
-</table>
+		<h2>My Trips</h2>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>City</th>
+					<th>No. of Days</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="trip in model.trips">
+					<td><a href="#/trip-create/{{trip._id}}">{{trip.city}}</a></td>
+					<td>{{trip.days.length}}</td>
+					<td class="no-wrap">
+						<button ng-click="model.deleteTrip(trip._id)" type="button" class="btn btn-danger">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

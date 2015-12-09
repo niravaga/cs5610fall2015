@@ -1,88 +1,103 @@
-<div class="row">
-	<h1>Trip to {{model.trip.city}}
+<div class="container">
+	<div class="col-sm-10 col-md-12 main">
+		<div class="row">
+			<h1>Trip to {{model.trip.city}}
 	</h1>
-</div>
-<div class="row" ng-if="model.isOwner || model.isCollaborator">
-	<div class="col-sm-7 col-md-7">
-		<form>
-			<div class="form-group">
-				<div class="input-group">
-					<input g-places-autocomplete ng-model="model.newPlace" type="text" class="form-control" placeholder="Add places of interest">
-					<span class="input-group-btn">
+		</div>
+		<div class="row" ng-if="model.isOwner || model.isCollaborator">
+			<div class="col-sm-7 col-md-7">
+				<form>
+					<div class="form-group">
+						<div class="input-group">
+							<input g-places-autocomplete ng-model="model.newPlace" type="text" class="form-control" placeholder="Add places of interest">
+							<span class="input-group-btn">
 					<button class="btn btn-success" type="submit"
 					ng-click="model.addPlace(model.newPlace)">
 					<span class="glyphicon glyphicon-plus"></span>
-					</button>
-					</span>
-				</div>
-			</div>
-		</form>
-	</div>
-	<div class="col-sm-5 col-md-5">
-		<button class="btn btn-primary" type="button" ng-click="model.addDay()">
-			Add Day
-		</button>
-		<a href="#/trip/{{model.trip._id}}/collaborate">
-			<button class="btn btn-primary" type="button">
-				Collaborate
-			</button>
-		</a>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-sm-7 col-md-7">
-		<div ng-repeat="day in model.trip.days" class="panel panel-default">
-			<div class="panel-heading">
-				<div class="pull-right" ng-if="model.isOwner || model.isCollaborator">
-					<button class="btn btn-default btn-xs" type="button" ng-click="model.setDayIndex($index)">
-						Add Here
-					</button>
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="model.deleteDay($index)">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<h3 class="panel-title">Day {{$index+1}}</h3>
-			</div>
-			<div ng-repeat="place in day.places" class="panel-body">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						{{place.name}}
-						<div class="pull-right" ng-if="model.isOwner || model.isCollaborator">
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="model.deletePlace($parent.$index, $index)">
-								<span aria-hidden="true">&times;</span>
 							</button>
+							</span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-sm-5 col-md-5">
+				<button class="btn btn-primary" type="button" ng-click="model.addDay()">
+					Add Day
+				</button>
+				<a href="#/trip/{{model.trip._id}}/collaborate">
+					<button class="btn btn-primary" type="button">
+						Collaborate
+					</button>
+				</a>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-7 col-md-7">
+				<div ng-repeat="(dayIndex, day) in model.trip.days" class="panel panel-default">
+					<div class="panel-heading">
+						<div class="pull-right" ng-if="model.isOwner || model.isCollaborator">
+							<button class="btn btn-default btn-xs" type="button" ng-click="model.setDayIndex($index)">
+								<span>Add Here</span>
+							</button>
+							<button class="btn btn-default btn-xs" type="button" ng-click="model.deleteDay($index)">
+								<span>Remove Day</span>
+							</button>
+						</div>
+						<h3 class="panel-title">Day {{$index+1}}</h3>
+					</div>
+					<div ng-repeat="place in day.places" class="panel-body">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								{{place.name}}
+								<div class="pull-right" ng-if="model.isOwner || model.isCollaborator">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="model.deletePlace(dayIndex, $index)">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	<div class="col-sm-5 col-md-5">
-		<div class="row">
-			<ui-gmap-google-map center="model.map.center" zoom="model.map.zoom">
-				<ui-gmap-markers models="model.markers" coords="'self'" icon="'icon'" fit="true">
-					<ui-gmap-windows show="show">
-						<div ng-non-bindable>{{title}}</div>
-					</ui-gmap-windows>
-				</ui-gmap-markers>
-			</ui-gmap-google-map>
-		</div>
-		<div class="row" ng-if="currentUser">
-			<h4>Reviews</h4>
-			<div ng-init="model.review.rating = 1">
-				<uib-rating ng-model="model.review.rating" max="5"></uib-rating> <b>(<i>Rate:</i> {{model.review.rating}})</b>
+			<div class="col-sm-5 col-md-5">
+				<div class="row">
+					<ui-gmap-google-map center="model.map.center" zoom="model.map.zoom">
+						<ui-gmap-markers models="model.markers" coords="'self'" icon="'icon'" fit="true">
+							<ui-gmap-windows show="show">
+								<div ng-non-bindable>{{title}}</div>
+							</ui-gmap-windows>
+						</ui-gmap-markers>
+					</ui-gmap-google-map>
+				</div>
+				<div>
+					<h4>Reviews</h4>
+					<div ng-if="currentUser">
+						<div class="pull-right" ng-init="model.review.rating = 1">
+							<uib-rating ng-model="model.review.rating" max="5"></uib-rating> <b>(<i>Rating:</i> {{model.review.rating}})</b>
+						</div>
+						<textarea class="form-control" placeHolder="Comment..." ng-model="model.review.comment">
+						</textarea>
+						<button class="btn btn-default col-md-12" type="button" ng-click="model.addReview()">
+							Add Comment
+						</button>
+					</div>
+					<ul class="list-unstyled">
+						<li ng-repeat="review in model.reviews">
+							<div class="well">
+								<strong>
+						{{review.user.username}}: 
+						</strong>
+								<uib-rating ng-model="review.rating" max="5" readonly="true"></uib-rating>
+								<div class="clearfix">
+									{{review.comment}}
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<textarea class="form-control" placeHolder="Comment..." ng-model="model.review.comment">
-			</textarea>
-			<button class="btn btn-default col-md-12" type="button" ng-click="model.addReview()">
-				Add Comment
-			</button>
-		</div>
-		<div class="row" ng-repeat="review in model.reviews">
-			{{review.rating}} - {{review.comment}}
 		</div>
 	</div>
-</div>
 </div>
 </div>

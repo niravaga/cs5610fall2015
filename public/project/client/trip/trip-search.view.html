@@ -1,22 +1,26 @@
-<h1>Trips for {{model.city}}</h1>
+<div class="container">
+	<div class="col-sm-10 col-md-12 main">
+		<h1>Trips for {{model.city}}</h1>
 
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>City</th>
-			<th>No. of Days</th>
-			<th>Created By</th>
-			<th>Average Rating</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="trip in model.trips">
-			<td>
-				<a href="#/trip-create/{{trip._id}}">{{trip.city}}</a>
-			</td>
-			<td>{{trip.days.length}}</td>
-			<td>{{trip.user.username}}</td>
-			<td>{{trip.averageRating}}</td>
-		</tr>
-	</tbody>
-</table>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>City</th>
+					<th>No. of Days</th>
+					<th>Created By</th>
+					<th>Average Rating</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="trip in model.trips">
+					<td>
+						<a href="#/trip-create/{{trip._id}}">{{trip.city}}</a>
+					</td>
+					<td>{{trip.days.length}}</td>
+					<td>{{trip.user.username}}</td>
+					<td>{{trip.averageRating}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

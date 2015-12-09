@@ -1,6 +1,6 @@
 module.exports = function (mongoose) {
 	var ReviewSchema = mongoose.Schema({
-		"authorId": String,
+		"userId": String,
 		"tripId": String,
 		"rating": Number,
 		"comment": String

@@ -5,7 +5,7 @@
 		.module("TripPlannerApp")
 		.controller("tripCreateController", tripCreateController);
 
-	function tripCreateController($rootScope, $routeParams, $location, uiGmapGoogleMapApi, TripService, PlaceService, ReviewService) {
+	function tripCreateController($rootScope, $routeParams, $location, uiGmapGoogleMapApi, TripService, PlaceService, ReviewService, UserService) {
 
 		var model = this;
 		model.addPlace = addPlace;
@@ -75,9 +75,20 @@
 			ReviewService
 				.findTripReviews(tripId)
 				.then(function (reviews) {
+					findReviewUsers(reviews);
 					console.log(reviews);
 					model.reviews = reviews;
 				});
+		}
+
+		function findReviewUsers(reviews) {
+			for (var i in reviews) {
+				UserService
+					.findUserById(reviews[i].userId)
+					.then(function (user) {
+						reviews[i].user = user;
+					});
+			}
 		}
 
 		function addTripMarkers(trip) {
@@ -165,9 +176,9 @@
 			dayIndex = index;
 		}
 
-		function deletePlace(dayIndex, placeIndex) {
+		function deletePlace(day, placeIndex) {
 			TripService
-				.deletePlace(tripId, dayIndex, placeIndex)
+				.deletePlace(tripId, day, placeIndex)
 				.then(function (trip) {
 					model.trip = trip;
 					addTripMarkers(trip);

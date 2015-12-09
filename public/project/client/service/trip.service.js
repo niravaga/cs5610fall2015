@@ -6,7 +6,6 @@
 		.factory("TripService", TripService);
 
 	function TripService($http, $q) {
-		var trips = [];
 
 		var api = {
 			createTrip: createTrip,
