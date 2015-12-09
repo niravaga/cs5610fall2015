@@ -24,6 +24,7 @@
 		model.isCollaborator = false;
 		var dayIndex = 0;
 		var markerId = 1;
+
 		function init() {
 			TripService
 				.findTripById(tripId)
@@ -39,7 +40,7 @@
 				PlaceService
 					.findPlace(trip.city)
 					.then(function (place) {
-						var location = place.data.results[0].geometry.location;
+						var location = place.geometry.location;
 
 						var center = {
 							latitude: location.lat,
@@ -49,7 +50,6 @@
 						uiGmapGoogleMapApi.then(showMap);
 
 						function showMap(maps) {
-							console.log(center);
 							model.map = { center: center, zoom: 8 };
 						}
 
@@ -71,6 +71,7 @@
 		}
 
 		init();
+
 		function initReviews() {
 			ReviewService
 				.findTripReviews(tripId)
@@ -97,7 +98,7 @@
 			for (var i in trip.days) {
 				var currPlaces = trip.days[i].places;
 				for (var j in currPlaces) {
-					addPlaceMarker(currPlaces[j].name);
+					addPlaceMarker(currPlaces[j]);
 				}
 			}
 		}
@@ -121,9 +122,16 @@
 
 		function addPlace(newPlace) {
 
-			var currPlace = { name: newPlace.name, placeId: newPlace.place_id };
+			console.log(newPlace.geometry.location.lat());
 
-			addPlaceMarker(newPlace.formatted_address);
+			var currPlace = {
+				name: newPlace.name,
+				placeId: newPlace.place_id,
+				latitude: newPlace.geometry.location.lat(),
+				longitude: newPlace.geometry.location.lng()
+			};
+
+			addPlaceMarker(currPlace);
 
 			PlaceService
 				.addPlace(model.trip._id, dayIndex, currPlace)
@@ -133,29 +141,16 @@
 				});
 		}
 
-		function addPlaceMarker(placeName) {
-			PlaceService
-				.findPlace(placeName)
-				.then(function (place) {
-					addMarker(place, placeName);
-				});
-		}
-
-		function addMarker(place, name) {
-			if (!place.data.results[0])
-				return;
-
-			var location = place.data.results[0].geometry.location;
-
+		function addPlaceMarker(place) {
 			var marker = {
-				latitude: location.lat,
-				longitude: location.lng,
+				latitude: place.latitude,
+				longitude: place.longitude,
 				id: markerId,
-				title: name
+				title: place.name
 			};
-
+			
 			markerId++;
-			console.log(place);
+			console.log(marker);
 			model.markers.push(marker);
 		}
 

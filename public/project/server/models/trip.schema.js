@@ -6,8 +6,8 @@ module.exports = function (mongoose) {
 			{
 				"places": [{
 					"name": String,
-					"latitude": String,
-					"longitude": String,
+					"latitude": Number,
+					"longitude": Number,
 					"placeId": String
 				}
 				]

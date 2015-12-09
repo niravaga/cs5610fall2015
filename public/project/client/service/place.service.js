@@ -17,7 +17,20 @@
 			var deferred = $q.defer();
 
 			$http
-				.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + name)
+				.get("/api/project/place/" + name)
+				.then(function (place) {
+					console.log(place);
+					deferred.resolve(place.data[0]);
+				});
+
+			return deferred.promise;
+		}
+
+		function findPlaceDetails(placeId) {
+			var deferred = $q.defer();
+
+			$http
+				.get("/api/project/place/" + name + "/details")
 				.then(function (place) {
 					deferred.resolve(place);
 				});
