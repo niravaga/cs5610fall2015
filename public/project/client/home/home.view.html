@@ -7,17 +7,15 @@
 			</div>
 			<form class="form-horizontal">
 
-				<!--<form class="form-horizontal">-->
+
 				<div class="input-group">
 					<input ng-model="model.city" type="text" class="form-control" placeholder="City">
 					<span class="input-group-btn">
 		<button type="submit" ng-click="model.searchTrips(model.city)" class="btn btn-primary">Search</button>
-		</span>
+		<button ng-click="model.createTrip()" class="btn btn-primary" data-toggle="tooltip" data-placement="left" uib-tooltip="Please login to create a trip"
+					tooltip-placement="bottom">Create a new trip</button>
+					</span>
 				</div>
-				<button ng-click="model.createTrip()" class="btn btn-primary" data-toggle="tooltip" data-placement="left" uib-tooltip="Please login to create a trip"
-				tooltip-placement="bottom">Create
-					<span ng-if="model.city">a new trip to {{model.city}}</span></button>
-				<!--</form>-->
 			</form>
 		</div>
 	</div>

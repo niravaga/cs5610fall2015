@@ -34,31 +34,36 @@
 
 		<div class="row">
 			<div class="col-sm-7 col-md-7">
-				<div ng-repeat="(dayIndex, day) in model.trip.days" class="panel panel-default">
-					<div class="panel-heading">
-						<div class="pull-right" ng-if="model.isOwner || model.isCollaborator">
-							<button class="btn btn-default btn-xs" type="button" ng-click="model.setDayIndex($index)">
-								<span>Add Here</span>
-							</button>
-							<button class="btn btn-default btn-xs" type="button" ng-click="model.deleteDay($index)">
-								<span>Remove Day</span>
-							</button>
-						</div>
-						<h3 class="panel-title">Day {{$index+1}}</h3>
-					</div>
-					<div ng-repeat="place in day.places" class="panel-body">
-						<div class="panel panel-default">
-							<div class="panel-body">
-								{{place.name}}
-								<div class="pull-right" ng-if="model.isOwner || model.isCollaborator">
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="model.deletePlace(dayIndex, $index)">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
+				<ul class="list-unstyled">
+					<li ng-repeat="(dayIndex, day) in model.trip.days" class="panel panel-default">
+						<div class="panel-heading">
+							<div class="pull-right" ng-if="model.isOwner || model.isCollaborator">
+								<button class="btn btn-default btn-xs" type="button" ng-click="model.setDayIndex($index)">
+									<span>Add Here</span>
+								</button>
+								<button class="btn btn-default btn-xs" type="button" ng-click="model.deleteDay($index)">
+									<span>Remove Day</span>
+								</button>
 							</div>
+							<h3 class="panel-title">Day {{$index+1}}</h3>
 						</div>
-					</div>
-				</div>
+						<div class="panel-body">
+							<ul class="list-unstyled">
+
+								<li class="panel panel-default" ng-repeat="place in day.places">
+									<div class="panel-body">
+										{{place.name}}
+										<div class="pull-right" ng-if="model.isOwner || model.isCollaborator">
+											<button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="model.deletePlace(dayIndex, $index)">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
 			</div>
 			<div class="col-sm-5 col-md-5">
 				<div class="row">
@@ -85,7 +90,7 @@
 					<ul class="list-unstyled">
 						<li ng-repeat="review in model.reviews">
 							<div class="well">
-								<strong>
+								<strong class="text-capitalize">
 						{{review.user.username}}: 
 						</strong>
 								<uib-rating ng-model="review.rating" max="5" readonly="true"></uib-rating>
