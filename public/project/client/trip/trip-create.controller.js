@@ -76,20 +76,28 @@
 			ReviewService
 				.findTripReviews(tripId)
 				.then(function (reviews) {
-					findReviewUsers(reviews);
 					console.log(reviews);
+					findReviewUsers(reviews);
 					model.reviews = reviews;
 				});
 		}
 
 		function findReviewUsers(reviews) {
+
+			var userIds = [];
+
 			for (var i in reviews) {
-				UserService
-					.findUserById(reviews[i].userId)
-					.then(function (user) {
-						reviews[i].user = user;
-					});
+				userIds.push(reviews[i].userId);
 			}
+
+			UserService
+				.findUserList(userIds)
+				.then(function (users) {
+					for (var i in reviews) {
+						console.log(reviews[i]);
+						reviews[i].user = users[i];
+					}
+				});
 		}
 
 		function addTripMarkers(trip) {
@@ -97,6 +105,16 @@
 			markerId = 1;
 			for (var i in trip.days) {
 				var currPlaces = trip.days[i].places;
+
+				// PlaceService
+				// 	.findPlaceListDetails(currPlaces.map(function (ob) { return ob.placeId }))
+				// 	.then(function (newPlaces) {
+				// 		for (var i in currPlaces) {
+				// 			currPlaces[i] = newPlaces[i];
+				// 		}
+				// 		console.log("placeDetails");
+				// 	});
+
 				for (var j in currPlaces) {
 					addPlaceMarker(currPlaces[j]);
 				}
@@ -148,7 +166,7 @@
 				id: markerId,
 				title: place.name
 			};
-			
+
 			markerId++;
 			console.log(marker);
 			model.markers.push(marker);

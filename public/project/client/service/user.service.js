@@ -13,6 +13,7 @@
 			findUserByUsernameAndPassword: findUserByUsernameAndPassword,
 			findUserByUsername: findUserByUsername,
 			findUserById: findUserById,
+			findUserList: findUserList,
 			deleteUserById: deleteUserById,
 			updateUser: updateUser,
 			login: login,
@@ -56,7 +57,7 @@
 
 			return deferred.promise;
 		}
-		
+
 		function findUserById(userId) {
 			var deferred = $q.defer();
 
@@ -128,6 +129,17 @@
 				});
 
 			return deferred.promise;
+		}
+
+		function findUserList(userIds) {
+			var promises = [];
+
+			for (var i in userIds) {
+				console.log(userIds[i]);
+				promises.push(findUserById(userIds[i]));
+			}
+
+			return $q.all(promises);
 		}
 	}
 })();

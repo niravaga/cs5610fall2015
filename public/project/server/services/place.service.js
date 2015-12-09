@@ -47,12 +47,26 @@ module.exports = function (app, model) {
 			response.on('end', function () {
 				var place = JSON.parse(body);
 				var location = place.result;
-
+				
+				console.log(location);
+				
+				if (location.photos) {
+					console.log("Finding photos");
+					addPhotoUrl(location.photos[0].photo_reference, location);
+				}
+				
 				res.json(location);
 			});
 		}).on('error', function (err) {
 			console.log("Error: " + err.message);
 		});
+	}
+
+	function addPhotoUrl(photoRef, place) {
+		var browserKey = "AIzaSyBbtkDxjuDPKJJev18t5TEnAGn0t9h-YrQ";
+		var url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&maxHeight=200&photoreference=" + photoRef + "&key=" + browserKey;
+		
+		place.photoUrl = url;
 	}
 
 	function addPlace(req, res) {

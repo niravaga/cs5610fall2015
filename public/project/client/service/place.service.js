@@ -8,7 +8,9 @@
 	function PlaceService($http, $q) {
 		var api = {
 			findPlace: findPlace,
-			addPlace: addPlace
+			addPlace: addPlace,
+			findPlaceDetails: findPlaceDetails,
+			findPlaceListDetails: findPlaceListDetails
 		};
 
 		return api;
@@ -30,12 +32,22 @@
 			var deferred = $q.defer();
 
 			$http
-				.get("/api/project/place/" + name + "/details")
+				.get("/api/project/place/" + placeId + "/details")
 				.then(function (place) {
-					deferred.resolve(place);
+					deferred.resolve(place.data);
 				});
 
 			return deferred.promise;
+		}
+
+		function findPlaceListDetails(placeIds) {
+			var promises = [];
+
+			for (var i in placeIds) {
+				promises.push(findPlaceDetails(placeIds[i]));
+			}
+
+			return $q.all(promises);
 		}
 
 		function addPlace(tripId, dayIndex, place) {
