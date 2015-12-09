@@ -39,7 +39,7 @@
 			$http
 				.get("/api/project/user")
 				.then(function (users) {
-					deferred.resolve(users);
+					deferred.resolve(users.data);
 				});
 
 			return deferred.promise;
@@ -74,7 +74,7 @@
 			$http
 				.delete("/api/project/user/" + id)
 				.then(function (users) {
-					deferred.resolve(users);
+					deferred.resolve(users.data);
 				});
 
 			return deferred.promise;

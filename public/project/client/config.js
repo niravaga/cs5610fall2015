@@ -48,6 +48,13 @@
 					setUser: setCurrentUser
 				}
 			})
+			.when("/admin", {
+				templateUrl: "admin/admin.view.html",
+				controller: "AdminController as model",
+				resolve: {
+					checkAdmin: checkAdmin
+				}
+			})
 			.otherwise({
 				redirectTo: "/home"
 			});
@@ -65,6 +72,25 @@ var checkLoggedin = function ($q, $timeout, $http, $location, $rootScope) {
 			}
 			else {
 				$rootScope.errorMessage = 'Please login to access this feature.';
+				deferred.reject();
+				$location.url('/login');
+			}
+		});
+
+	return deferred.promise;
+};
+
+var checkAdmin = function ($q, $timeout, $http, $location, $rootScope) {
+	var deferred = $q.defer();
+
+	$http.get('/api/project/admin')
+		.success(function (user) {
+			if (user !== '0') {
+				$rootScope.currentUser = user;
+				deferred.resolve();
+			}
+			else {
+				$rootScope.errorMessage = 'Only Administrators can access this feature';
 				deferred.reject();
 				$location.url('/login');
 			}

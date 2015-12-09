@@ -20,7 +20,7 @@
                                     $rootScope.currentUser = response;
                                     $location.url("/profile");
                               } else {
-                                    model.message = "Invalid username or pasword";
+                                    model.message = "Invalid username or password";
                               }
                         });
             }

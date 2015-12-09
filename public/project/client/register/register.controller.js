@@ -14,6 +14,7 @@
 
 
 		function register() {
+			console.log(model.newUser);
 			UserService
 				.createUser(model.newUser)
 				.then(userCreated);
@@ -26,9 +27,9 @@
 					if (response != null) {
 						$rootScope.currentUser = response;
 						$location.url("/profile");
-					} else {
-						model.message = "Invalid username or pasword";
 					}
+				}, function (err) {
+					model.message = "The username has already been taken";
 				});
 		}
 	}

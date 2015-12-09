@@ -2,6 +2,7 @@ module.exports = function (app, model, passport) {
 	app.get("/api/project/loggedin", loggedIn);
 	app.post("/api/project/login", passport.authenticate('local'), login);
 	app.post("/api/project/logout", logout);
+	app.get('/api/project/admin', admin);
 	app.post("/api/project/user", createUser);
 	app.get("/api/project/user", findUsers);
 	app.get("/api/project/user/:id", findUserById);
@@ -25,6 +26,22 @@ module.exports = function (app, model, passport) {
 
 	function loggedIn(req, res) {
 		res.send(req.isAuthenticated() ? req.user : '0');
+	}
+
+	function admin(req, res) {
+		if (req.isAuthenticated()) {
+			model
+				.findUserByUsername(req.user.username)
+				.then(function (user) {
+					if (user.role == "ADMIN")
+						res.json(user);
+					else
+						res.send('0');
+				});
+		}
+		else {
+			res.send('0');
+		}
 	}
 
 

@@ -9,9 +9,10 @@
 		var model = this;
 		model.location = $location;
 
-		console.log($rootScope.currentUser);
-
 		model.logout = logout;
+		
+		// if ($rootScope.currentUser && $rootScope.currentUser.role == "ADMIN")
+			model.admin = true;
 
 		function logout() {
 			UserService

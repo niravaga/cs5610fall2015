@@ -24,6 +24,8 @@ module.exports = function (mongoose, db) {
 
 		if (newUser["_id"])
 			delete newUser["_id"];
+			
+		console.log(newUser);
 
 		UserModel.create(newUser, function (err, doc) {
 			UserModel.find(function (err, users) {
