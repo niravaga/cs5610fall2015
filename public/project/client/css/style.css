@@ -121,7 +121,7 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 #home {
-  background-image: url("bg3.jpg");
+  background-image: url("bg2.jpg");
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: cover;

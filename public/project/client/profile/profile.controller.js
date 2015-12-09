@@ -11,7 +11,8 @@
 		model.currentUser = $rootScope.currentUser;
 
 		model.deleteTrip = deleteTrip;
-
+		model.update = updateUser;
+		
 		function init() {
 			TripService
 				.findTripsForUser(model.currentUser._id)
@@ -21,6 +22,14 @@
 		}
 
 		init();
+		
+		function updateUser(updatedUser) {
+			UserService
+				.updateUser(model.currentUser._id, updatedUser)
+				.then(function (user) {
+					model.message = "Profile Updated"
+				});
+		}
 
 		function deleteTrip(tripId) {
 			TripService
