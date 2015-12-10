@@ -114,8 +114,10 @@ module.exports = function (mongoose, db) {
 
 	function findAllTripsForCity(city) {
 		var deferred = q.defer();
+		
+		var regex = new RegExp(["^", city, "$"].join(""), "i");
 
-		TripModel.find({ city: city }, function (err, trips) {
+		TripModel.find({ city: regex }, function (err, trips) {
 			if (err)
 				deferred.reject(err);
 			else
