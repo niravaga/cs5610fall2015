@@ -37,7 +37,7 @@
 
 		<div class="row">
 			<div class="col-sm-7 col-md-7">
-				<ul ui-sortable ng-model="model.trip.days" class="list-unstyled">
+				<ul ui-sortable ng-model="model.trip.days" class="list-unstyled sortable">
 					<li ng-repeat="(dayIndex, day) in model.trip.days" class="panel panel-default">
 						<div class="panel-heading">
 							<div class="pull-right" ng-if="model.isOwner || model.isCollaborator">
@@ -51,7 +51,7 @@
 							<h3 class="panel-title">Day {{$index+1}}</h3>
 						</div>
 						<div class="panel-body">
-							<ul ui-sortable=model.sortableOptions ng-model="model.trip.days[$index].places" class="list-unstyled apps-container">
+							<ul ui-sortable=model.sortableOptions ng-model="model.trip.days[$index].places" class="list-unstyled apps-container sortable">
 								<li class="panel panel-default" ng-repeat="place in day.places">
 									<div class="panel-body">
 										{{place.name}}

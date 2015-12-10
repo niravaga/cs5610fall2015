@@ -143,6 +143,10 @@
   color: #FFF;
 }
 
+.sortable {
+  cursor: move;
+}
+
 
 /*
  * AutoComplete
