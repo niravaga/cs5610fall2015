@@ -21,12 +21,20 @@
 				});
 
 			function findTripUsers(trips) {
+				var userIds = [];
+
+				for (var i in trips) {
+					userIds.push(trips[i].userId);
+				}
+				
 				for (var i in trips) {
 					UserService
-						.findUserById(trips[i].userId)
-						.then(function (user) {
-							trips[i].user = user;
-							console.log(user);
+						.findUserList(userIds)
+						.then(function (users) {
+							for (var i in trips) {
+								console.log(trips[i]);
+								trips[i].user = users[i];
+							}
 						});
 				}
 			}
