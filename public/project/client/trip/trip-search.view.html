@@ -17,7 +17,7 @@
 						<a href="#/trip-create/{{trip._id}}">{{trip.city}}</a>
 					</td>
 					<td>{{trip.days.length}}</td>
-					<td>{{trip.user.username}}</td>
+					<td>{{trip.user.firstName || trip.user.username}}</td>
 					<td>{{trip.averageRating}}</td>
 				</tr>
 			</tbody>
