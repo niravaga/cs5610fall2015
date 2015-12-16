@@ -195,7 +195,7 @@
 		}
 
 		function deletePlace(day, placeIndex) {
-			TripService
+			PlaceService
 				.deletePlace(tripId, day, placeIndex)
 				.then(function (trip) {
 					model.trip = trip;

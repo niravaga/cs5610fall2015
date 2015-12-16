@@ -9,6 +9,7 @@
 		var api = {
 			findPlace: findPlace,
 			addPlace: addPlace,
+			deletePlace: deletePlace,
 			findPlaceDetails: findPlaceDetails,
 			findPlaceListDetails: findPlaceListDetails
 		};
@@ -57,6 +58,18 @@
 				.post("/api/project/trip/" + tripId + "/day/" + dayIndex + "/place", place)
 				.then(function (trip) {
 					console.log(trip);
+					deferred.resolve(trip.data);
+				});
+
+			return deferred.promise;
+		}
+		
+		function deletePlace(tripId, dayIndex, placeIndex) {
+			var deferred = $q.defer();
+
+			$http
+				.delete("/api/project/trip/" + tripId + "/day/" + dayIndex + "/place/" + placeIndex)
+				.then(function (trip) {
 					deferred.resolve(trip.data);
 				});
 

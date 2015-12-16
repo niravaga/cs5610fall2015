@@ -15,7 +15,6 @@
 			findAllTripsForCity: findAllTripsForCity,
 			addDayToTrip: addDayToTrip,
 			deleteDay: deleteDay,
-			deletePlace: deletePlace,
 			updateTrip: updateTrip,
 			deleteTrip: deleteTrip,
 			addCollaborator: addCollaborator,
@@ -117,18 +116,6 @@
 				.get("/api/project/trip/city/" + city)
 				.then(function (trips) {
 					deferred.resolve(trips.data);
-				});
-
-			return deferred.promise;
-		}
-
-		function deletePlace(tripId, dayIndex, placeIndex) {
-			var deferred = $q.defer();
-
-			$http
-				.delete("/api/project/trip/" + tripId + "/day/" + dayIndex + "/place/" + placeIndex)
-				.then(function (trip) {
-					deferred.resolve(trip.data);
 				});
 
 			return deferred.promise;

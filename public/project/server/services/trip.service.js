@@ -4,7 +4,6 @@ module.exports = function (app, model) {
 	app.post("/api/project/trip/:tripId/day", addDayToTrip);
 	app.get("/api/project/trip/city/:city", findAllTripsForCity);
 	app.get("/api/project/trip/user/:userId", findTripsForUser);
-	app.delete("/api/project/trip/:tripId/day/:dayIndex/place/:placeIndex", deletePlace);
 	app.delete("/api/project/trip/:tripId/day/:dayIndex", deleteDay);
 	app.delete("/api/project/trip/:tripId", deleteTrip);
 	app.post("/api/project/trip/:tripId/collaborator/", addCollaborator);
@@ -60,18 +59,6 @@ module.exports = function (app, model) {
 			.findTripsForUser(userId)
 			.then(function (trips) {
 				res.json(trips);
-			});
-	}
-
-	function deletePlace(req, res) {
-		var tripId = req.params.tripId;
-		var dayIndex = req.params.dayIndex;
-		var placeIndex = req.params.placeIndex;
-
-		model
-			.deletePlace(tripId, dayIndex, placeIndex)
-			.then(function (trip) {
-				res.json(trip);
 			});
 	}
 

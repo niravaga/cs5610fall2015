@@ -3,6 +3,7 @@ var key = "AIzaSyAMShhBML8rlCNJ6DlnsU8wF84rfiWMISw";
 
 module.exports = function (app, model) {
 	app.post("/api/project/trip/:tripId/day/:dayIndex/place", addPlace);
+	app.delete("/api/project/trip/:tripId/day/:dayIndex/place/:placeIndex", deletePlace);
 	app.get("/api/project/place/:name", getPlace);
 	app.get("/api/project/place/:name/details", getPlaceDetails);
 
@@ -76,6 +77,18 @@ module.exports = function (app, model) {
 
 		model
 			.addPlace(tripId, dayIndex, place)
+			.then(function (trip) {
+				res.json(trip);
+			});
+	}
+	
+	function deletePlace(req, res) {
+		var tripId = req.params.tripId;
+		var dayIndex = req.params.dayIndex;
+		var placeIndex = req.params.placeIndex;
+
+		model
+			.deletePlace(tripId, dayIndex, placeIndex)
 			.then(function (trip) {
 				res.json(trip);
 			});
