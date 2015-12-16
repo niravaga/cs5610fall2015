@@ -8,7 +8,8 @@
 	function ReviewService($http, $q) {
 		var api = {
 			addReview: addReview,
-			findTripReviews: findTripReviews
+			findTripReviews: findTripReviews,
+			findTripListReviews: findTripListReviews
 		}
 
 		return api;
@@ -35,6 +36,17 @@
 				});
 
 			return deferred.promise;
+		}
+
+		function findTripListReviews(tripIds) {
+			var promises = [];
+
+			for (var i in tripIds) {
+				// console.log(tripIds[i]);
+				promises.push(findTripReviews(tripIds[i]));
+			}
+
+			return $q.all(promises);
 		}
 	}
 })();

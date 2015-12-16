@@ -40,12 +40,21 @@
 			}
 
 			function findAverageRatings(trips) {
+				
+				var tripIds = [];
+				
+				for (var i in trips) {
+					tripIds.push(trips[i]._id);
+				}
+				
 				for (var i in trips) {
 					ReviewService
-						.findTripReviews(trips[i]._id)
+						.findTripListReviews(tripIds)
 						.then(function (reviews) {
-							trips[i].averageRating = findAverageRating(reviews);
-						})
+							for (var i in trips) {
+								trips[i].averageRating = findAverageRating(reviews[i]);
+							}
+						});
 				}
 			}
 
