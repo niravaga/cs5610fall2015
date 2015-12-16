@@ -18,6 +18,7 @@
 				<li ng-show="currentUser.role == 'ADMIN'" ng-class="{'active' : model.location.url().indexOf('admin') != -1}"><a href="#/admin">Admin</a></li>
 				<li ng-show="currentUser" ng-class="{'active' : model.location.url().indexOf('profile') != -1}" class="text-capitalize"><a href="#/profile">Welcome, {{currentUser.firstName || currentUser.username}}.</a></li>
 				<li ng-show="currentUser"ng-class="{'active' : model.location.url().indexOf('logout') != -1}"><a href="#" ng-click="model.logout()">Logout</a></li>
+				<li><a href="https://docs.google.com/document/d/15tGz_qIswxDo_4Flz-sUbLlE10ZPgEzZ3iPnJq4fR3g/edit?usp=sharing">Project Proposal</a></li>
 			</ul>
 		</div>
 	</div>
