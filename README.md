@@ -1,6 +1,6 @@
 # CS 5610 - Web Development
 
-## Topics (till now):
+## Topics:
 
 * HTML
 * CSS
