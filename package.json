@@ -1,16 +1,15 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "NiravAga",
   "version": "1.0.0",
-  "description": "OpenShift Sample Application",
+  "description": "Personal Website",
   "keywords": [
-    "OpenShift",
+    "Nirav",
     "Node.js",
-    "application",
-    "openshift"
+    "application"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
+    "name": "Nirav Aga",
+    "email": "niravaga@gmail.com",
     "url": "http://www.openshift.com/"
   },
   "homepage": "http://www.openshift.com/",
