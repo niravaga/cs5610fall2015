@@ -131,6 +131,7 @@
 				.findTripById(tripId)
 				.then(function (trip) {
 					model.trip = trip;
+					console.log("CurrentTrip: ", trip);
 				});
 		}
 

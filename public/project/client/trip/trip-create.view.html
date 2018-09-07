@@ -11,10 +11,9 @@
 						<div class="input-group">
 							<input g-places-autocomplete ng-model="model.newPlace" type="text" class="form-control" placeholder="Add places of interest">
 							<span class="input-group-btn">
-								<button class="btn btn-success" type="submit"
-								ng-click="model.addPlace(model.newPlace)">
-								<span class="glyphicon glyphicon-plus"></span>
-							</button>
+								<button class="btn btn-success" type="submit" ng-click="model.addPlace(model.newPlace)">
+									<span class="glyphicon glyphicon-plus"></span>
+								</button>
 							</span>
 						</div>
 					</div>
@@ -81,7 +80,9 @@
 					<h4>Reviews</h4>
 					<div ng-if="currentUser">
 						<div class="pull-right" ng-init="model.review.rating = 1">
-							<uib-rating ng-model="model.review.rating" max="5"></uib-rating> <b>(<i>Rating:</i> {{model.review.rating}})</b>
+							<uib-rating ng-model="model.review.rating" max="5"></uib-rating>
+							<b>(
+								<i>Rating:</i> {{model.review.rating}})</b>
 						</div>
 						<textarea class="form-control" placeHolder="Comment..." ng-model="model.review.comment">
 						</textarea>
@@ -93,8 +94,8 @@
 						<li ng-repeat="review in model.reviews">
 							<div class="well">
 								<strong class="text-capitalize">
-					{{review.user.username}}: 
-				</strong>
+									{{review.user.username}}:
+								</strong>
 								<uib-rating ng-model="review.rating" max="5" readonly="true"></uib-rating>
 								<div class="clearfix">
 									{{review.comment}}
