@@ -18,7 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var port = process.env.PORT || 3000;
+console.log(port);
 var mongo_url = process.env.MONGODB_URI || 'mongodb://localhost/cs5610';
 console.log(mongo_url);
 mongoose.connect(mongo_url);
@@ -29,4 +30,4 @@ require("./public/experiments/mongo/server/app.js")(app, mongoose, db);
 require("./public/assignment/server/app.js")(app, mongoose, db);
 require("./public/project/server/app.js")(app, mongoose, db, passport, LocalStrategy);
 
-app.listen(port, ipaddress);
+app.listen(port);
