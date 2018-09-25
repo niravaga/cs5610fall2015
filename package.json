@@ -10,9 +10,9 @@
   "author": {
     "name": "Nirav Aga",
     "email": "niravaga@gmail.com",
-    "url": "http://www.openshift.com/"
+    "url": "http://niravaga.herokuapp.com/"
   },
-  "homepage": "http://www.openshift.com/",
+  "homepage": "http://niravaga.herokuapp.com/",
   "repository": {
     "type": "git",
     "url": "https://github.com/openshift/origin-server"
